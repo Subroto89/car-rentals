@@ -12,7 +12,7 @@ const RootLayout = () => {
       <main className="w-11/12 mx-auto min-h-screen my-10">
         <Outlet></Outlet>
       </main>
-      <footer className="w-11/12 mx-auto my-10">
+      <footer className="my-10">
         <Footer></Footer>
       </footer>
     </div>
