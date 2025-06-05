@@ -7,7 +7,7 @@ import navLinks from "./navLinks";
 const SideNav = () => {
   return (
     <div>
-      <div className="h-screen w-1/2 bg-white pl-4 pr-4">
+      <div className="h-screen w-1/2 bg-white pl-4 pr-4 pt-6">
         {/* Navigation Links - Public*/}
         {navLinks.map((link, index) => (
           <NavLink

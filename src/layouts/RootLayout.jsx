@@ -9,10 +9,10 @@ const RootLayout = () => {
       <nav>
         <Navbar></Navbar>
       </nav>
-      <main>
+      <main className="w-11/12 mx-auto min-h-screen my-10">
         <Outlet></Outlet>
       </main>
-      <footer>
+      <footer className="w-11/12 mx-auto my-10">
         <Footer></Footer>
       </footer>
     </div>

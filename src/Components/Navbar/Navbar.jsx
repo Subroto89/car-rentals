@@ -23,8 +23,8 @@ const Navbar = () => {
             <img src={logo} alt="car-logo" className="w-40" />
           </figure>
           <div className="flex flex-col justify-center">
-            <h1>Go & Get Car Rentals</h1>
-            <p>Ready For Your Road</p>
+            <h1 className="text-2xl font-bold text-blue-500">Go & Get Car Rentals</h1>
+            <p className="text-xl font-bold text-blue-500">Ready For Your Road</p>
           </div>
         </div>
 
@@ -58,10 +58,10 @@ const Navbar = () => {
 
         {/* Register, Sign In & Log Out Buttons */}
         <div>
-          <Link className="btn btn-outline text-xl">
+          <Link to="/register" className="btn btn-outline text-xl">
             <MdAccountCircle /> Register
           </Link>
-          <Link className="btn btn-outline text-xl">
+          <Link to="/signin" className="btn btn-outline text-xl">
             <MdLogin /> Sign In
           </Link>
 
@@ -71,14 +71,13 @@ const Navbar = () => {
         </div>
         {/* Hamburger For Mobile Screen */}
         <div>
-          <RxHamburgerMenu size={40} onClick={handleToggleSideBar} />
+          <RxHamburgerMenu size={40} onClick={handleToggleSideBar}/>
         </div>
       </div>
-
-      {/* Menu For Hamburger Icon */}
-      {open && (
-        <SideNav></SideNav>
-      )}
+        {/* Menu For Hamburger Icon */}
+      <div className="mt-10">
+        {open && <SideNav></SideNav>}
+      </div>
     </div>
   );
 };
