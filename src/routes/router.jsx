@@ -9,6 +9,7 @@ import MyBookings from '../Pages/MyBookings/MyBookings';
 import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
 import PrivateRoute from './PrivateRoute';
+import ErrorPage from '../Pages/ErrorPage';
 
 
 const router = createBrowserRouter([
@@ -44,7 +45,13 @@ const router = createBrowserRouter([
                 path: '/my-bookings',
                 element: <PrivateRoute><MyBookings/></PrivateRoute>
             }
-        ]
+        ],
+        
+    },
+    {
+        path: '/*',
+        Component: ErrorPage
     }
+    
 ])
 export default router;
