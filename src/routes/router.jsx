@@ -2,7 +2,11 @@ import React from 'react';
 import {createBrowserRouter} from 'react-router';
 import RootLayout from '../layouts/RootLayout';
 import Home from '../Pages/Home/Home';
-import { Outlet } from 'react-router';
+import AvailableCars from '../Pages/AvailableCars/AvailableCars';
+import AddCar from '../Pages/AddCar/AddCar';
+import MyCar from '../Pages/MyCar/MyCar';
+import MyBookings from '../Pages/MyBookings/MyBookings';
+
 
 const router = createBrowserRouter([
     {
@@ -12,6 +16,22 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: '/available-cars',
+                Component: AvailableCars 
+            },
+            {
+                path: '/add-car',
+                Component: AddCar
+            },
+            {
+                path: '/my-cars',
+                Component: MyCar
+            },
+            {
+                path: '/my-bookings',
+                Component: MyBookings
             }
         ]
     }
