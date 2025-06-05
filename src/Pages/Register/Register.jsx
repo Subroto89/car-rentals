@@ -1,16 +1,19 @@
 import React, { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const { createUser, signInWithGoogle, updateUserProfile, setUser } =
+    use(AuthContext);
 
-    const { createUser } = use(AuthContext);
-    // State for show & hide password
+    const navigate = useNavigate()
+  // State for show & hide password
   const [passwordType, setPasswordType] = useState("password");
 
-//   functionality to show & hide password
-const handleShowPassword = () => {
+  //   functionality to show & hide password
+  const handleShowPassword = () => {
     setPasswordType("text");
   };
 
@@ -40,18 +43,56 @@ const handleShowPassword = () => {
 
     // Register User Using Email and Password
     createUser(emailId, password)
-    .then(userCredential => {
+      .then((userCredential) => {
         const user = userCredential.user;
+        // Update User Profile
+        updateUserProfile({ displayName: userName, photoURL: userPhoto }).then(
+          () => {
+            form.reset();
+            // Update user state with new profile data
+            setUser({ ...user, displayName: userName, photoURL: userPhoto });
+            Swal.fire({
+              position: "center-center",
+              icon: "success",
+              title: "You are successfully registered",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate('/');
+          }
+        );
+
         console.log("User registered successfully", user);
-    })
-    .catch(error => {
-        console.log(error)
-    })
-  }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //   singIn funciton using Google
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigate('/');
+        if (user.accessToken) {
+          Swal.fire({
+            position: "center-center",
+            icon: "success",
+            title: "Welcome",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="max-w-1/2 mx-auto p-8 space-y-8 rounded-xl bg-white shadow-md dark:bg-gray-300 dark:text-gray-800">
-      <div >
+      <div>
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* User Name */}
@@ -114,10 +155,8 @@ const handleShowPassword = () => {
             {passwordType === "password" ? (
               <FaEyeSlash
                 size={20}
-                className="absolute right-3 top-10" 
-                onClick={() => handleShowPassword()
-                    
-                }
+                className="absolute right-3 top-10"
+                onClick={() => handleShowPassword()}
               />
             ) : (
               <FaEye
@@ -127,20 +166,59 @@ const handleShowPassword = () => {
               />
             )}
           </fieldset>
-           <button
-              type="submit"
-              className="btn block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-blue-600"
-            >
-              Register
-            </button>
+          <button
+            type="submit"
+            className="btn block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-blue-600"
+          >
+            Register
+          </button>
         </form>
       </div>
-      <div className="divider divider-primary">Instead, You Can Sign In with Google</div>
-      <button className="btn bg-white text-black border-[#e5e5e5] w-full">
-  <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-  Login with Google
-</button>
- <p className="text-center">Already have an account? <Link to="/signin" className="button border-b hover:border-blue-800 text-blue-500 font-bold cursor-pointer">Sign In</Link></p>
+      <div className="divider divider-primary">
+        Instead, You Can Sign In with Google
+      </div>
+      <button
+        onClick={handleGoogleSignIn}
+        className="btn bg-white text-black border-[#e5e5e5] w-full"
+      >
+        <svg
+          aria-label="Google logo"
+          width="16"
+          height="16"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <g>
+            <path d="m0 0H512V512H0" fill="#fff"></path>
+            <path
+              fill="#34a853"
+              d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+            ></path>
+            <path
+              fill="#4285f4"
+              d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+            ></path>
+            <path
+              fill="#fbbc02"
+              d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+            ></path>
+            <path
+              fill="#ea4335"
+              d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+            ></path>
+          </g>
+        </svg>
+        Login with Google
+      </button>
+      <p className="text-center">
+        Already have an account?{" "}
+        <Link
+          to="/signin"
+          className="button border-b hover:border-blue-800 text-blue-500 font-bold cursor-pointer"
+        >
+          Sign In
+        </Link>
+      </p>
     </div>
   );
 };

@@ -1,42 +1,90 @@
-import React from 'react';
-import { AuthContext } from './AuthContext';
-import auth from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import auth from "../firebase/firebase.config";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  updateProfile,
+} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+  // ----------------------------------------------------------------
+  // State to Hold User Data on Registration/Sign-In/Sign-Out/Refresh
+  // ----------------------------------------------------------------
+  const [user, setUser] = useState(null);
 
-    // User Registration Using Email and Password
-    const createUser = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+  // -------------------------------------
+  // User Registration Using Email and Password
+  // -------------------------------------
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    
+  // -------------------------------------
+  // Sign-In User Using Email and Password
+  // -------------------------------------
+  const signInUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    // Sign In User Using Email and Password
-    const signInUser = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+  // -------------------------------------
+  // Sign-In User Using Google
+  // -------------------------------------
+  const signInWithGoogle = () => {
+    return signInWithPopup(auth, provider);
+  };
 
-    // SignIn Using Google
-   const signInWithGoogle = () => {
-        return signInWithPopup(auth, provider)
-   }
-    const authData = {
-        createUser,
-        signInUser,
-        signInWithGoogle
+  // -------------------------------------
+  // Sign-Out User
+  // -------------------------------------
+  const signOutUser = () => {
+    return signOut(auth);
+  };
+
+  // -------------------------------------
+  // Authentication State Observer
+  // -------------------------------------
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Cleanup function to unsubscribe from the observer when the component unmounts
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+
+  //   -------------------------------------
+  // Update User Profile
+  //   -------------------------------------
+  const updateUserProfile = (updatedData) => {
+    return updateProfile(auth.currentUser, updatedData)
+  }
 
 
-    }
 
 
-    return (
-        <AuthContext value={authData}>
-            {children}  
-        </AuthContext>
-    );
+  // -------------------------------------
+  // Auth Data to be Provided to the Context
+  // -------------------------------------
+  const authData = {
+    user,
+    setUser,
+    createUser,
+    signInUser,
+    signInWithGoogle,
+    signOutUser,
+    updateUserProfile
+  };
+
+  return <AuthContext value={authData}>{children}</AuthContext>;
 };
 
 export default AuthProvider;
