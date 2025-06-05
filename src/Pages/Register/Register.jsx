@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
+
+    const { createUser } = use(AuthContext);
     // State for show & hide password
   const [passwordType, setPasswordType] = useState("password");
 
@@ -34,6 +37,16 @@ const handleShowPassword = () => {
       alert("Password must have atleast 1 uppercase and 1 lower case");
       return;
     }
+
+    // Register User Using Email and Password
+    createUser(emailId, password)
+    .then(userCredential => {
+        const user = userCredential.user;
+        console.log("User registered successfully", user);
+    })
+    .catch(error => {
+        console.log(error)
+    })
   }
 
   return (

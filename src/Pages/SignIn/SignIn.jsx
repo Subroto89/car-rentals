@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const SignIn = () => {
+    const {signInUser} = use(AuthContext);
     const [passwordType, setPasswordType] = useState("password");
     // Functionality to show & hide password
     const handleShowPassword = () => {
@@ -12,7 +14,22 @@ const SignIn = () => {
         setPasswordType("password");
     };
     const handleSubmit = (e) => {
-        e.preventDefault();}
+        e.preventDefault();
+        // Form fields' value
+        const form = e.target;
+        const emailId = form.email.value;
+        const password = form.password.value;
+
+        // Sign In User Using Email and Password
+        signInUser(emailId, password)
+        .then(userCredential => {
+            const user = userCredential.user;
+            console.log("User signed in successfully", user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
     return (
         <div className="max-w-1/2 mx-auto p-8 space-y-8 rounded-xl bg-white shadow-md dark:bg-gray-300 dark:text-gray-800">
              <div >

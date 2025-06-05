@@ -6,7 +6,7 @@ import { IoCallOutline } from "react-icons/io5";
 const Footer = () => {
   return (
     <div className="h-[800px] bg-[url('https://i.ibb.co/fVsJ2kdp/78786.jpg')] bg-cover bg-center">
-      <div class="bg-black opacity-60 h-full w-full">
+      <div className="bg-black opacity-60 h-full w-full">
         {/* Footer - Top Part */}
         <div className="flex items-center justify-between w-10/12 mx-auto mb-20">
           <div className="relative">
