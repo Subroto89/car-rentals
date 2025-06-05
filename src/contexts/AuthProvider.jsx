@@ -15,6 +15,11 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   // ----------------------------------------------------------------
+  // Loader State to Show/Hide Loader During Authentication
+  // ----------------------------------------------------------------
+  const [loading, setLoading] = useState(false);
+
+  // ----------------------------------------------------------------
   // State to Hold User Data on Registration/Sign-In/Sign-Out/Refresh
   // ----------------------------------------------------------------
   const [user, setUser] = useState(null);
@@ -23,6 +28,7 @@ const AuthProvider = ({ children }) => {
   // User Registration Using Email and Password
   // -------------------------------------
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -30,6 +36,7 @@ const AuthProvider = ({ children }) => {
   // Sign-In User Using Email and Password
   // -------------------------------------
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -37,6 +44,7 @@ const AuthProvider = ({ children }) => {
   // Sign-In User Using Google
   // -------------------------------------
   const signInWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
@@ -44,6 +52,7 @@ const AuthProvider = ({ children }) => {
   // Sign-Out User
   // -------------------------------------
   const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -53,6 +62,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
 
     // Cleanup function to unsubscribe from the observer when the component unmounts
@@ -65,11 +75,8 @@ const AuthProvider = ({ children }) => {
   // Update User Profile
   //   -------------------------------------
   const updateUserProfile = (updatedData) => {
-    return updateProfile(auth.currentUser, updatedData)
-  }
-
-
-
+    return updateProfile(auth.currentUser, updatedData);
+  };
 
   // -------------------------------------
   // Auth Data to be Provided to the Context
@@ -81,7 +88,9 @@ const AuthProvider = ({ children }) => {
     signInUser,
     signInWithGoogle,
     signOutUser,
-    updateUserProfile
+    updateUserProfile,
+    loading,
+    setLoading,
   };
 
   return <AuthContext value={authData}>{children}</AuthContext>;

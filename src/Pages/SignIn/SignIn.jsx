@@ -1,11 +1,14 @@
 import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import Swal from 'sweetalert2';
 
 const SignIn = () => {
     const {signInUser, signInWithGoogle} = use(AuthContext);
+
+    const location = useLocation();
+    const destinationPath = location.state || '/';
 
     const navigate = useNavigate();
     
@@ -29,7 +32,7 @@ const SignIn = () => {
         signInUser(emailId, password)
         .then(userCredential => {
             const user = userCredential.user;
-            navigate('/');
+            navigate(destinationPath);
             if (user.accessToken) {
                 Swal.fire({
                     position: 'center-center',
@@ -49,7 +52,7 @@ const SignIn = () => {
         signInWithGoogle()
         .then(userCredential => {
             const user = userCredential.user;
-            navigate('/');
+            navigate(destinationPath);
              if (user.accessToken) {
                 Swal.fire({
                     position: 'center-center',
