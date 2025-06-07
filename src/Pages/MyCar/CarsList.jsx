@@ -1,8 +1,22 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { MdModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router";
+import CarUpdate from "./CarUpdate";
 
 const CarsList = ({ myCarsPromise }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCarId, setSelectedCarId] = useState(null);
+  
+  const handleModalOpen = (id) => {
+    setSelectedCarId(id)
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSelectedCarId(null);
+  }
+
   const carsData = use(myCarsPromise);
 
   return (
@@ -72,26 +86,33 @@ const CarsList = ({ myCarsPromise }) => {
                 className="text-gray-600 hover:bg-blue-50 transition-colors duration-150"
               >
                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                <td className="px-6 py-4 whitespace-nowrap"><img src={car.carPhoto} className="w-20 h-14 "/></td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <img src={car.carPhoto} className="w-20 h-14" />
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.carModel}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.dailyRent}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{car.bookingStatus}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">
+                  {car.bookingStatus}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                     <span
+                  <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      car.availability == 'Available'
+                      car.availability == "Available"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {car.availability == 'Available' ? "Available" : "Not Available"}
+                    {car.availability == "Available"
+                      ? "Available"
+                      : "Not Available"}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.entryDate}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center gap-4">
                   <Link
+                    onClick={()=>handleModalOpen(car._id)}
                     id="anchorEdit"
-                    // to={`/my-listing/particular/${listing._id}`}
+                    // to={`/car-update/${car._id}`}
                     className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-green-300 cursor-pointer group"
                   >
                     <MdModeEdit
@@ -103,16 +124,15 @@ const CarsList = ({ myCarsPromise }) => {
                       content="Edit the post!"
                     /> */}
                   </Link>
-                  
+
                   <div
-                  id="anchor-element"
+                    id="anchor-element"
                     // onClick={() => handleDelete(listing._id)}
-                    className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-green-300 cursor-pointer group"
+                    className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-red-600 cursor-pointer group"
                   >
                     <MdOutlineDeleteOutline
                       size={16}
                       className="text-gray-800 group-hover:text-white"
-                      
                     />
                     {/* <Tooltip
                       anchorSelect="#anchor-element"
@@ -125,6 +145,7 @@ const CarsList = ({ myCarsPromise }) => {
           </tbody>
         </table>
       </div>
+      {modalOpen && selectedCarId && <CarUpdate selectedCarId={selectedCarId} handleModalClose={handleModalClose} />}
     </div>
   );
 };

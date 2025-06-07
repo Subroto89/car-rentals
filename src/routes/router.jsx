@@ -10,6 +10,7 @@ import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
 import PrivateRoute from './PrivateRoute';
 import ErrorPage from '../Pages/ErrorPage';
+import CarUpdate from '../Pages/MyCar/CarUpdate';
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
             {
                 path: '/my-cars',
                 element: <PrivateRoute><MyCars/></PrivateRoute>
+            },
+            {
+                path: '/car-update',
+                // loader: ({params}) => {fetch(`http://localhost:3000/car/${params.id}`)},
+                Component: CarUpdate
             },
             {
                 path: '/my-bookings',
