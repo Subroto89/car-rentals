@@ -1,7 +1,11 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useLocation } from "react-router";
+import Swal from "sweetalert2";
 
 const CarUpdate = ({ selectedCarId, handleModalClose }) => {
+  const navigate = useLocation();
   const [carData, setCarData] = useState(null);
   console.log(selectedCarId);
   useEffect(() => {
@@ -14,6 +18,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
   if (!carData) return <p>Loading...</p>;
 
   const {
+    _id,
     availability,
     bookingStatus,
     carDescription,
@@ -31,7 +36,29 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-  }
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // fetch for update
+    axios
+      .put(`http://localhost:3000/update-car/${_id}`, data)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Car's Info Updated Sucessfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+      handleModalClose();
+      navigate("/my-cars");
+    
+  };
   return (
     <div className="fixed inset-0 bg-black/60 z-100 pt-12">
       <div className="w-11/12 mx-auto h-10/12 px-8 mt-10 bg-amber-50 rounded-lg text-gray-600">
@@ -43,7 +70,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
         </div>
 
         <form
-          //   onSubmit={handleSubmit}
+          onSubmit={handleUpdate}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
           <input
@@ -88,7 +115,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
               name="features"
               id="features"
               placeholder="Features-seperate by comma"
-              defaultValue={features.join(", ")}
+              defaultValue={Array.isArray(features) ? features.join(", ") : ""}
               className="w-full px-3 py-2 text-gray-600 border-b border-cyan-600 bg-transparent focus:outline-none"
             />
 
@@ -126,7 +153,6 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
                 name="availability"
                 id="availability"
                 value="Available"
-                
                 checked={carData?.availability === "Available"}
                 onChange={() =>
                   setCarData({ ...carData, availability: "Available" })
@@ -142,7 +168,6 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
                 name="availability"
                 id="unavailability"
                 value="Not Available"
-                
                 checked={carData?.availability === "Not Available"}
                 onChange={() =>
                   setCarData({ ...carData, availability: "Not Available" })
