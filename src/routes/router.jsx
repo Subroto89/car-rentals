@@ -4,7 +4,7 @@ import RootLayout from '../layouts/RootLayout';
 import Home from '../Pages/Home/Home';
 import AvailableCars from '../Pages/AvailableCars/AvailableCars';
 import AddCar from '../Pages/AddCar/AddCar';
-import MyCar from '../Pages/MyCar/MyCar';
+import MyCars from '../Pages/MyCar/MyCars';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-cars',
-                element: <PrivateRoute><MyCar/></PrivateRoute>
+                element: <PrivateRoute><MyCars/></PrivateRoute>
             },
             {
                 path: '/my-bookings',

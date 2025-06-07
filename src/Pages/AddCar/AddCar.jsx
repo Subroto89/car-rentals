@@ -20,10 +20,11 @@ const AddCar = () => {
     data.bookingStatus = 0;
     data.entryDate = new Date().toLocaleDateString();
     data.owner = user.displayName;
+    data.ownerEmail=user.email
 
     // Post data to database
     axios
-      .post("http://localhost:3000/car", data)
+      .post("http://localhost:3000/add-car", data)
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {
@@ -34,6 +35,7 @@ const AddCar = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          form.reset();
         }
       })
       .catch((error) => {
