@@ -1,12 +1,54 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddCar = () => {
+  const { user } = use(AuthContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    const featuresArray = data.features
+      .split(",")
+      .map((feature) => feature.trim());
+    data.features = featuresArray;
+    data.bookingStatus = 0;
+    data.entryDate = new Date().toLocaleDateString();
+    data.owner = user.displayName;
+
+    // Post data to database
+    axios
+      .post("http://localhost:3000/car", data)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.acknowledged) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Car Entry Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="w-11/12 mx-auto">
       <h2 className="text-2xl font-bold text-center mb-12">Add New Car</h2>
       <div>
-        <form className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+        >
           <input
             type="text"
             name="carName"
@@ -49,7 +91,6 @@ const AddCar = () => {
             />
 
             <textarea
-              type="textarea"
               name="carDescription"
               id="carDescription"
               placeholder="Car Description"
@@ -90,15 +131,20 @@ const AddCar = () => {
               <input
                 type="radio"
                 name="avaiability"
-                id="availability"
+                id="unavailability"
                 value="Not Available"
                 placeholder="Car Location"
                 className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent"
               />
-              <label htmlFor="availability">Unavailable</label>
+              <label htmlFor="unavailability">Unavailable</label>
             </fieldset>
           </div>
-          <Link className="btn btn-outline hover:bg-green-400 font-bold">Add Car</Link>
+          <button
+            type="submit"
+            className="btn btn-outline hover:bg-green-400 font-bold"
+          >
+            Add Car
+          </button>
         </form>
       </div>
     </div>

@@ -35,7 +35,7 @@ const SignIn = () => {
             navigate(destinationPath);
             if (user.accessToken) {
                 Swal.fire({
-                    position: 'center-center',
+                    position: 'center',
                     icon: 'success',
                     title: 'Welcome',
                     showConfirmButton: false,
