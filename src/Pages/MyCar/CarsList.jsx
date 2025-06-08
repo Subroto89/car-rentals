@@ -2,22 +2,88 @@ import React, { use, useState } from "react";
 import { MdModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router";
 import CarUpdate from "./CarUpdate";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const CarsList = ({ myCarsPromise }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
   
+
   const handleModalOpen = (id) => {
-    setSelectedCarId(id)
+    setSelectedCarId(id);
     setModalOpen(true);
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedCarId(null);
-  }
-
+  };
+  // carsList form auto update korar jonne carsData ti state e rakha jete pare & set function ti update form e
+  // pathano jete pare
   const carsData = use(myCarsPromise);
+
+
+  const handleDeleteCar = async (id, onDeletionSuccess) => {
+    const result = await Swal.fire({
+      title: "Do you want to delete?",
+      text: "Once deleted, it cannot be reverted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/delete-car/${id}`
+        );
+
+        if (response.data && response.data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your car entry has been deleted successfully.",
+            icon: "success",
+          });
+          // Notify the parent component to re-fetch/update the car list
+          if (onDeletionSuccess) {
+            onDeletionSuccess();
+          }
+        } else {
+          // If backend responds 2xx but deletedCount is 0, means car not found on server
+          Swal.fire({
+            title: "Not Found!",
+            text: "The car was not found or already deleted on the server.",
+            icon: "info",
+          });
+        }
+      } catch (error) {
+        console.error("Error deleting car:", error);
+
+        let errorMessage =
+          "An unexpected error occurred while trying to delete the car.";
+        if (error.response) {
+          errorMessage =
+            error.response.data.message ||
+            `Server error: ${error.response.status} - ${error.response.statusText}`;
+        } else if (error.request) {
+          errorMessage =
+            "No response from the server. Please check your network connection.";
+        } else {
+          errorMessage = `Error in request setup: ${error.message}`;
+        }
+
+        Swal.fire({
+          title: "Deletion Failed!",
+          text: errorMessage,
+          icon: "error",
+        });
+      }
+    }
+  };
 
   return (
     <div>
@@ -61,7 +127,7 @@ const CarsList = ({ myCarsPromise }) => {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Avaiability
+                Availability
               </th>
               <th
                 scope="col"
@@ -110,7 +176,7 @@ const CarsList = ({ myCarsPromise }) => {
                 <td className="px-6 py-4 whitespace-nowrap">{car.entryDate}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center gap-4">
                   <Link
-                    onClick={()=>handleModalOpen(car._id)}
+                    onClick={() => handleModalOpen(car._id)}
                     id="anchorEdit"
                     // to={`/car-update/${car._id}`}
                     className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-green-300 cursor-pointer group"
@@ -127,7 +193,7 @@ const CarsList = ({ myCarsPromise }) => {
 
                   <div
                     id="anchor-element"
-                    // onClick={() => handleDelete(listing._id)}
+                    onClick={() => handleDeleteCar(car._id)}
                     className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-red-600 cursor-pointer group"
                   >
                     <MdOutlineDeleteOutline
@@ -145,7 +211,12 @@ const CarsList = ({ myCarsPromise }) => {
           </tbody>
         </table>
       </div>
-      {modalOpen && selectedCarId && <CarUpdate selectedCarId={selectedCarId} handleModalClose={handleModalClose} />}
+      {modalOpen && selectedCarId && (
+        <CarUpdate
+          selectedCarId={selectedCarId}
+          handleModalClose={handleModalClose}
+        />
+      )}
     </div>
   );
 };

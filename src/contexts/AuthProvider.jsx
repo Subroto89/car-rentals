@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
   // ----------------------------------------------------------------
   // Loader State to Show/Hide Loader During Authentication
   // ----------------------------------------------------------------
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // ----------------------------------------------------------------
   // State to Hold User Data on Registration/Sign-In/Sign-Out/Refresh
@@ -61,6 +61,7 @@ const AuthProvider = ({ children }) => {
   // -------------------------------------
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      
       setUser(currentUser);
       setLoading(false);
     });
