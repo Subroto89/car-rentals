@@ -44,20 +44,32 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <MyCars />
           </PrivateRoute>
-        )
+        ),
       },
       {
         path: "/car-update",
-        // loader: ({params}) => {fetch(`http://localhost:3000/car/${params.id}`)},
         Component: CarUpdate,
       },
       {
         path: "/available-cars",
-        Component: AvailableCars
+        Component: AvailableCars,
       },
       {
         path: "/car-details/:id",
-        Component: CarDetails
+        loader: async ({ params }) => {
+          
+          const response = await fetch(
+            `http://localhost:3000/car/${params.id}`
+          );
+
+          if (!response.ok) {
+            throw new Response("Car not found", { status: response.status });
+          }
+
+          const data = await response.json(); 
+          return data;
+        },
+        Component: CarDetails,
       },
       {
         path: "/my-bookings",
