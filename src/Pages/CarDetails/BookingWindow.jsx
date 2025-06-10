@@ -26,7 +26,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
   }, [startDate, endDate, dailyRent]);
 
   //----------------------------------------------------------------
-  //   Function For Formatting Date - For handleBooking Function 
+  //   Function For Formatting Date - Used In handleBooking Function 
   //----------------------------------------------------------------
   const formatDateInput = (dateInput) => {
     const date = new Date(dateInput);
@@ -72,7 +72,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
   };
 
   return (
-    <div className="w-full h-full bg-black/70 fixed inset-0 flex items-center justify-center">
+    <div className="w-full h-full fixed inset-0 bg-black/70  flex items-center justify-center">
       <div className="w-1/3 h-2/3 flex flex-col gap-2 bg-white rounded-md mt-30 text-gray-800 p-6">
         <h2 className="text-lg font-bold">Booking Confirmation</h2>
         <p>
