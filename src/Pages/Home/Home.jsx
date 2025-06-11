@@ -7,7 +7,7 @@ import SpecialOffers from '../../Components/Home_Component/SpecialOffers';
 const Home = () => {
     const facilitiesPromise = fetch('facilities.json').then(res => res.json());
     return (
-        <div>
+        <div className=''>
            {/* Banner Component */}
            <Banner></Banner>
 
@@ -17,9 +17,7 @@ const Home = () => {
            </Suspense>
 
             {/* Special Offers Component */}
-            <SpecialOffers>
-
-            </SpecialOffers>
+            <SpecialOffers></SpecialOffers>
 
 
 

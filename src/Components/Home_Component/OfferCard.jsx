@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router'; // Assuming you use React Router for navigation
+import { Link } from 'react-router'; 
 import { motion } from 'framer-motion';
 
 
 const cardVariants = {
-  hidden: { x: -100, opacity: 0 }, // Starts 100px left and invisible
-  visible: { x: 0, opacity: 1, transition: { duration: 0.5 } } // Slides to position and fades in
+  hidden: { x: -100, opacity: 0 }, 
+  visible: { x: 0, opacity: 1, transition: { duration: 0.5 } } 
 };
 
 const OfferCard = ({ offer }) => {
