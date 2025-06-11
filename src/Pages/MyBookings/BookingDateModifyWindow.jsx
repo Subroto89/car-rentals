@@ -24,7 +24,10 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
         0,
         differenceInTime / (1000 * 60 * 60 * 24)
       );
+      console.log(differenceInDays)
+      console.log(particularCar)
       setTotalCost(differenceInDays * particularCar.dailyRent);
+      console.log(totalCost)
     }
   }, [startDate, endDate, particularCar.dailyRent]);
 
@@ -135,9 +138,9 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
         </fieldset>
         <div className="flex items-center justify-end gap-3">
           <button onClick={handleIsWindowOpen} className="btn">
-          close
+          Cancel
         </button>
-          <button onClick={handleModify} className="btn">Modify</button>
+          <button onClick={handleModify} className="btn">Confirm</button>
         </div>
       </div>
     </div>

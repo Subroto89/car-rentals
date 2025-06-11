@@ -49,6 +49,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
       bookingDate: formatDateInput(new Date()),
       startDate: formatDateInput(startDate),
       endDate: formatDateInput(endDate),
+      dailyRent: dailyRent,
       totalPrice: totalCost,
       bookingStatus: true,
     };
