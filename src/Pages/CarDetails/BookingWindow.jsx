@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const BookingWindow = ({ modalClose, carInfo }) => {
     const {user} = use(AuthContext)
-  const { _id, carName, carModel, carPhoto, dailyRent, availability } = carInfo;
+  const { _id, carName, carModel, carPhoto, dailyRent, availability, bookingStatus } = carInfo;
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");

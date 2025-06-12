@@ -3,6 +3,7 @@ import Banner from '../../Components/Home_Component/Banner';
 import Facility from '../../Components/Home_Component/Facility';
 import ServiceCounter from '../../Components/Home_Component/ServiceCounter';
 import SpecialOffers from '../../Components/Home_Component/SpecialOffers';
+import RecentListings from '../../Components/Home_Component/RecentListings';
 
 const Home = () => {
     const facilitiesPromise = fetch('facilities.json').then(res => res.json());
@@ -19,7 +20,8 @@ const Home = () => {
             {/* Special Offers Component */}
             <SpecialOffers></SpecialOffers>
 
-
+            {/* Recent Listings Component */}
+            <RecentListings></RecentListings>
 
            {/* Counter Component */}
            <ServiceCounter></ServiceCounter>

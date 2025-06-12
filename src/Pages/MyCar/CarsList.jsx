@@ -168,7 +168,7 @@ const CarsList = ({ myCarsPromise }) => {
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {car.availability == "Available"
+                    {car.availability === "Available"
                       ? "Available"
                       : "Not Available"}
                   </span>

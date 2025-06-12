@@ -22,7 +22,7 @@ const CarDetails = () => {
     entryDate,
     features,
   } = carInfo;
-  console.log(carInfo);
+  console.log(features);
   return (
     <div>
       <div className="w-11/12 mx-auto bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden h-auto pb-20">
@@ -48,10 +48,10 @@ const CarDetails = () => {
             <p className="text-xl font-semibold">
               <span className="font-bold text-xl">Features:</span>{" "}
               {
-                features.split(",").map((feature) => (
-                  <spa className="text-blue-600 font-semibold border border-gray-200 px-3 mr-2">
+                features.map((feature) => (
+                  <span className="text-blue-600 font-semibold border border-gray-200 px-3 mr-2">
                     {feature.trim()}
-                  </spa>
+                  </span>
                 ))
 
                 // features.map((feature, index)=><span key={index} className="text-blue-600 font-semibold text-lg px-2">{feature}</span>)

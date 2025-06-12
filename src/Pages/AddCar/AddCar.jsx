@@ -21,6 +21,7 @@ const AddCar = () => {
     data.entryDate = new Date().toLocaleDateString();
     data.owner = user.displayName;
     data.ownerEmail=user.email
+    data.availability = "Available"
 
     // Post data to database
     axios
