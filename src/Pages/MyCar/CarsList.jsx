@@ -1,14 +1,62 @@
-import React, { use, useState } from "react";
+// CarsList.jsx
+import React, { useState, useEffect, useCallback } from "react";
 import { MdModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
-import { Link } from "react-router";
+// import { Link } from "react-router"; // Not used for actions, can remove if not used for navigation
 import CarUpdate from "./CarUpdate";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const CarsList = ({ myCarsPromise }) => {
+// Receive userEmail as a prop
+const CarsList = ({ userEmail }) => {
+  const [carsData, setCarsData] = useState([]); // State to hold the cars data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
+  const [sortOption, setSortOption] = useState('date_newest');
+
   
+  const fetchCars = useCallback(async () => {
+  
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`http://localhost:3000/cars?email=${userEmail}`);
+      setCarsData(response.data);
+    } catch (err) {
+      console.error("Error fetching cars:", err);
+      setError("Failed to load cars. Please try again.");
+      setCarsData([]); // Clear previous data on error
+    } finally {
+      setLoading(false);
+    }
+  }, [userEmail]);
+
+  // Fetch cars on component mount and whenever userEmail or fetchCars changes
+  useEffect(() => {
+    fetchCars();
+  }, [fetchCars]);
+
+const getStoredCars = useCallback((carsData)=>{
+  const sortedCarsData = [...carsData]
+
+   switch (sortOption) {
+            case 'date_newest':
+                return sortedCarsData.sort((a, b) => new Date(b.entryDate) - new Date(a.entryDate));
+            case 'date_oldest':
+                return sortedCarsData.sort((a, b) => new Date(a.entryDate) - new Date(b.entryDate));
+            case 'price_lowest':
+                return sortedCarsData.sort((a, b) => a.dailyRent - b.dailyRent);
+            case 'price_highest':
+                return sortedCarsData.sort((a, b) => b.dailyRent - a.dailyRent);
+            default:
+                return sortedCarsData; 
+        }
+},[sortOption])
+
+const displyCarsData = getStoredCars(carsData)
+
+
 
   const handleModalOpen = (id) => {
     setSelectedCarId(id);
@@ -18,13 +66,10 @@ const CarsList = ({ myCarsPromise }) => {
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedCarId(null);
+    fetchCars();
   };
-  // carsList form auto update korar jonne carsData ti state e rakha jete pare & set function ti update form e
-  // pathano jete pare
-  const carsData = use(myCarsPromise);
 
-
-  const handleDeleteCar = async (id, onDeletionSuccess) => {
+  const handleDeleteCar = async (id) => { 
     const result = await Swal.fire({
       title: "Do you want to delete?",
       text: "Once deleted, it cannot be reverted!",
@@ -48,12 +93,9 @@ const CarsList = ({ myCarsPromise }) => {
             text: "Your car entry has been deleted successfully.",
             icon: "success",
           });
-          // Notify the parent component to re-fetch/update the car list
-          if (onDeletionSuccess) {
-            onDeletionSuccess();
-          }
+          // CRITICAL: Re-fetch data after successful deletion
+          fetchCars();
         } else {
-          // If backend responds 2xx but deletedCount is 0, means car not found on server
           Swal.fire({
             title: "Not Found!",
             text: "The car was not found or already deleted on the server.",
@@ -85,75 +127,61 @@ const CarsList = ({ myCarsPromise }) => {
     }
   };
 
+  if (loading) {
+    return <div className="text-center text-white text-xl py-8">Loading cars...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500 text-xl py-8">Error: {error}</div>;
+  }
+
+  if (!carsData || carsData.length === 0) {
+    return <div className="text-center text-gray-400 text-xl py-8">No cars found for this user.</div>;
+  }
+
   return (
     <div>
-      <h2 className="text-4xl text-white">{carsData.length}</h2>
+      <h2 className="text-4xl text-white text-center mb-4">You have {carsData.length} cars.</h2> {/* Updated text */}
+       <div>
+                    <label htmlFor="sort-select" className="mr-2">Sort by:</label>
+                    <select
+                        id="sort-select"
+                        value={sortOption}
+                        onChange={(e) => setSortOption(e.target.value)}
+                        className="p-2 border rounded-md"
+                    >
+                        <option value="date_newest">Date Added (Newest First)</option>
+                        <option value="date_oldest">Date Added (Oldest First)</option>
+                        <option value="price_lowest">Price (Lowest First)</option>
+                        <option value="price_highest">Price (Highest First)</option>
+                    </select>
+                </div>
       <div className="overflow-x-auto bg-white rounded-xl shadow-2xl border border-gray-200 mx-8 md:mx-16 my-8">
         <table className="min-w-full divide-y divide-gray-200">
           {/* Table Head */}
           <thead className="bg-gray-100">
             <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                #
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Photo
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Model No
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Daily Rental Price
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Booking Count
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Availability
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Entry Date
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Action
-              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model No</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Daily Rental Price</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking Count</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Availability</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entry Date</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
             </tr>
           </thead>
 
           {/* Table Body */}
           <tbody className="bg-white divide-y divide-gray-200">
-            {carsData.map((car, index) => (
+            {displyCarsData.map((car, index) => (
               <tr
                 key={car._id}
                 className="text-gray-600 hover:bg-blue-50 transition-colors duration-150"
               >
                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <img src={car.carPhoto} className="w-20 h-14" />
+                  <img src={car.carPhoto} className="w-20 h-14 object-cover rounded" alt={car.carModel} />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.carModel}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.dailyRent}</td>
@@ -163,7 +191,7 @@ const CarsList = ({ myCarsPromise }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      car.availability == "Available"
+                      car.availability === "Available"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}
@@ -175,36 +203,27 @@ const CarsList = ({ myCarsPromise }) => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.entryDate}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center gap-4">
-                  <Link
+                  <button
                     onClick={() => handleModalOpen(car._id)}
-                    id="anchorEdit"
-                    // to={`/car-update/${car._id}`}
                     className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-green-300 cursor-pointer group"
+                    title="Edit Car"
                   >
                     <MdModeEdit
                       size={16}
                       className="text-gray-800 group-hover:text-white"
                     />
-                    {/* <Tooltip
-                      anchorSelect="#anchorEdit"
-                      content="Edit the post!"
-                    /> */}
-                  </Link>
+                  </button>
 
-                  <div
-                    id="anchor-element"
+                  <button
                     onClick={() => handleDeleteCar(car._id)}
                     className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-red-600 cursor-pointer group"
+                    title="Delete Car"
                   >
                     <MdOutlineDeleteOutline
                       size={16}
                       className="text-gray-800 group-hover:text-white"
                     />
-                    {/* <Tooltip
-                      anchorSelect="#anchor-element"
-                      content="Delete Post!"
-                    /> */}
-                  </div>
+                  </button>
                 </td>
               </tr>
             ))}
@@ -214,7 +233,7 @@ const CarsList = ({ myCarsPromise }) => {
       {modalOpen && selectedCarId && (
         <CarUpdate
           selectedCarId={selectedCarId}
-          handleModalClose={handleModalClose}
+          handleModalClose={handleModalClose} // Pass this function to CarUpdate
         />
       )}
     </div>

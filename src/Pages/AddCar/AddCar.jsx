@@ -121,7 +121,7 @@ const AddCar = () => {
             <fieldset className="flex items-center gap-2">
               <input
                 type="radio"
-                name="avaiability"
+                name="availability"
                 id="availability"
                 value="Available"
                 placeholder="Car Location"
@@ -133,7 +133,7 @@ const AddCar = () => {
             <fieldset className="flex items-center gap-2">
               <input
                 type="radio"
-                name="avaiability"
+                name="availability"
                 id="unavailability"
                 value="Not Available"
                 placeholder="Car Location"

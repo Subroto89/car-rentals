@@ -48,7 +48,7 @@ const CarDetails = () => {
             <p className="text-xl font-semibold">
               <span className="font-bold text-xl">Features:</span>{" "}
               {
-                features.map((feature) => (
+                features.split(',').map((feature) => (
                   <span className="text-blue-600 font-semibold border border-gray-200 px-3 mr-2">
                     {feature.trim()}
                   </span>

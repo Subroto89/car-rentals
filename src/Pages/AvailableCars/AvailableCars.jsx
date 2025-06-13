@@ -6,8 +6,9 @@ const AvailableCars = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [viewMode, setViewMode] = useState('grid'); 
-    const [sortOption, setSortOption] = useState('date_newest'); 
+    const [viewMode, setViewMode] = useState('grid');
+    const [sortOption, setSortOption] = useState('date_newest');
+    const [searchTerm, setSearchTerm] = useState(''); // New state for search term
 
     // Function to fetch cars data
     const fetchCars = useCallback(async () => {
@@ -33,10 +34,29 @@ const AvailableCars = () => {
         fetchCars();
     }, [fetchCars]);
 
+    // Function to filter cars based on the search term
+    const getFilteredCars = useCallback(() => {
+        if (!searchTerm) {
+            return cars; // If no search term, return all cars
+        }
+
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+        return cars.filter(car => {
+            // Check if brand, model, or location includes the search term
+            return (
+                car.carName.toLowerCase().includes(lowerCaseSearchTerm) ||
+                car.carModel.toLowerCase().includes(lowerCaseSearchTerm) ||
+                car.carLocation.toLowerCase().includes(lowerCaseSearchTerm)
+            );
+        });
+    }, [cars, searchTerm]);
+
+
     // Function to sort cars based on the selected option
-    const getSortedCars = useCallback(() => {
-        // Always sort a copy to avoid mutating state directly
-        const sorted = [...cars]; 
+    const getSortedCars = useCallback((filteredCars) => { 
+
+        const sorted = [...filteredCars];
 
         switch (sortOption) {
             case 'date_newest':
@@ -50,9 +70,11 @@ const AvailableCars = () => {
             default:
                 return sorted; // Return unsorted if no valid option
         }
-    }, [cars, sortOption]);
+    }, [sortOption]); // Only depends on sortOption now
 
-    const displayedCars = getSortedCars();
+    // First filter, then sort
+    const filteredAndSortedCars = getSortedCars(getFilteredCars());
+
 
     if (loading) return <div className="text-center py-8">Loading cars...</div>;
     if (error) return <div className="text-center py-8 text-red-500">Error: {error}</div>;
@@ -79,6 +101,21 @@ const AvailableCars = () => {
                     </button>
                 </div>
 
+                {/* Search Bar */}
+                <div className='flex items-center gap-1'>
+                    <label htmlFor="search">Search Brand, Model, or Location</label> {/* Updated label */}
+                    <input
+                        type="search"
+                        name="search"
+                        id="search"
+                        className='w-full border border-gray-300 rounded-md p-2' // Added a border for visibility
+                        placeholder="e.g., Toyota, Camry, Dhaka" // Added a placeholder
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)} // Add onChange handler
+                    />
+                </div>
+
+
                 {/* Sorting Dropdown */}
                 <div>
                     <label htmlFor="sort-select" className="mr-2">Sort by:</label>
@@ -97,17 +134,17 @@ const AvailableCars = () => {
             </div>
 
             {/* Conditional Rendering of Cars */}
-            {displayedCars.length === 0 ? (
+            {filteredAndSortedCars.length === 0 ? (
                 <p className="text-center text-lg">No cars found based on current criteria.</p>
             ) : viewMode === 'grid' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {displayedCars.map(car => (
+                    {filteredAndSortedCars.map(car => (
                         <CarGridCard key={car._id} car={car} />
                     ))}
                 </div>
             ) : ( // viewMode === 'list'
                 <div className="flex flex-col gap-4">
-                    {displayedCars.map(car => (
+                    {filteredAndSortedCars.map(car => (
                         <CarListItem key={car._id} car={car} />
                     ))}
                 </div>
