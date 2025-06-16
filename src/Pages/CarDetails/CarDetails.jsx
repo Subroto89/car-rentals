@@ -22,51 +22,92 @@ const CarDetails = () => {
     entryDate,
     features,
   } = carInfo;
-  console.log(features);
+  
+
+
   return (
     <div>
       <div className="w-11/12 mx-auto bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden h-auto pb-20">
-        <h2 className="w-11/12 mx-auto text-xl font-bold mt-6">All Car Info</h2>
+        <h2 className="w-11/12 mx-auto text-xl font-bold mt-6">Car Info</h2>
         <div className="flex items-center justify-start p-6">
           <figure>
             <img
               src={carPhoto}
               alt="car photo"
-              className="w-98"
+              className="w-60 lg:w-98"
             />
           </figure>
           <div>
             <h2 className="text-xl font-bold text-blue-600">{carName}</h2>
             <p className="text-xl font-semibold">
-              <span className="font-bold text-xl">Model:</span>
+              <span className="font-bold text-lg lg:text-xl">Model:</span>
               {carModel}
             </p>
-            <p className="text-xl font-semibold">
-              <span className="font-bold text-xl">Reg No:</span>
+            <p className="text-lg lg:text-xl font-semibold">
+              <span className="font-bold text-lg lg:text-xl">Reg No:</span>
               {carRegNo}
             </p>
-            <p className="text-xl font-semibold">
-              <span className="font-bold text-xl">Features:</span>{" "}
+            <p className="text-lg lg:text-xl font-semibold hidden lg:block">
+              <span className="font-bold text-lg lg:text-xl">Features:</span>{" "}
               {
-                features.split(',').map((feature) => (
-                  <span className="text-blue-600 font-semibold border border-gray-200 px-3 mr-2">
+                
+                features.map((feature) => (
+                  <span className="text-blue-600 text-sm lg:text-lg font-semibold border border-gray-200 px-3 mr-2 rounded-lg">
                     {feature.trim()}
                   </span>
                 ))
 
-                // features.map((feature, index)=><span key={index} className="text-blue-600 font-semibold text-lg px-2">{feature}</span>)
+               
               }
             </p>
           </div>
         </div>
+         <p className="text-lg lg:text-xl font-semibold block lg:hidden w-11/12 mx-auto mb-2">
+              <span className="font-bold text-lg lg:text-xl">Features:</span>{" "}
+              {
+                
+                features.map((feature) => (
+                  <span className="text-blue-600 text-sm lg:text-lg font-semibold border border-gray-200 px-3 mr-2 rounded-lg">
+                    {feature.trim()}
+                  </span>
+                ))
+
+               
+              }
+            </p>
        <div>
-         <div className="w-11/12 mx-auto flex gap-4">
-            <p className="text-md font-semibold"><span className="font-bold text-xl mr-2">Location:</span>{carLocation}</p>
-            <p className="text-md font-semibold"><span className="font-bold text-xl mr-2">Included on:</span>{entryDate}</p>
-            <p className="text-md font-semibold"><span className="font-bold text-xl mr-2">Daily Rent:</span>{dailyRent}</p>
-            <p className="text-md font-semibold"><span className="font-bold text-xl mr-2">Car Status:</span>{availability}</p>
-            <p className="text-md font-semibold"><span className="font-bold text-xl mr-2">Booking Status:</span>{bookingStatus>0?'Booked' : 'Not Booked'}</p>
+         <div className="w-11/12 mx-auto hidden  lg:flex gap-4">
+            <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-xl mr-2">Location:</span>{carLocation}</p>
+            <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-xl mr-2">Included on:</span>{entryDate}</p>
+            <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-xl mr-2">Daily Rent:</span>{dailyRent}</p>
+            <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-xl mr-2">Car Status:</span>{availability}</p>
+            <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-xl mr-2">Booking Status:</span>{bookingStatus>0?'Booked' : 'Not Booked'}</p>
               <button onClick={handleShowModal} className="bg-green-400 text-md font-semibold hover:bg-green-600 text-white hover:text-amber-600 px-3 py-1 rounded-md">Book Now</button>
+        </div>
+
+        <div className="w-11/12 mx-auto block lg:hidden">
+          <table className="w-full">
+              <tr>
+                <td className="font-bold text-sm lg:text-xl mr-2">Location:</td>
+                <td className="text-md font-semibold">{carLocation}</td>
+                <td className="font-bold text-sm lg:text-xl mr-2">Included On:</td>
+                <td className="text-md font-semibold">{entryDate}</td>
+              </tr>
+              <tr>
+                <td className="font-bold text-sm lg:text-xl mr-2">Daily Rent:</td>
+                <td className="text-md font-semibold">{dailyRent}</td>
+                <td className="font-bold text-sm lg:text-xl mr-2">Car Status:</td>
+                <td className="text-md font-semibold">{availability}</td>
+              </tr>
+              <tr>
+                <td className="font-bold text-sm lg:text-xl mr-2">Booking Status:</td>
+                <td className="text-md font-semibold">{bookingStatus ?'Booked' : 'Not Booked'}</td>
+                <td colspan="2" className="pr-4">
+                  <button onClick={handleShowModal} className="w-full bg-green-400 text-md font-semibold hover:bg-green-600 text-white hover:text-amber-600 py-1 rounded-md">Book Now</button>
+                </td>
+                
+              </tr>
+          </table>
         </div>
         <div>
             

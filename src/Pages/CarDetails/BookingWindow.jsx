@@ -70,11 +70,12 @@ const BookingWindow = ({ modalClose, carInfo }) => {
     } catch (error) {
       console.log(error);
     }
+    modalClose();
   };
 
   return (
     <div className="w-full h-full fixed inset-0 bg-black/70  flex items-center justify-center">
-      <div className="w-1/3 h-2/3 flex flex-col gap-2 bg-white rounded-md mt-30 text-gray-800 p-6">
+      <div className="w-2/3 lg:w-1/3 h-2/3 flex flex-col gap-2 bg-white rounded-md mt-30 text-gray-800 p-6">
         <h2 className="text-lg font-bold">Booking Confirmation</h2>
         <p>
           You are booking: <span className="font-semibold">{carName}</span>
@@ -102,7 +103,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
           <FaRegCalendarDays className="absolute top-8 right-3 pointer-events-none" />
         </fieldset>
 
-        <p>Total Cost: {totalCost} BDT</p>
+        <p>Total Cost: ${totalCost}</p>
 
         <div className="flex gap-4 justify-end">
           <button

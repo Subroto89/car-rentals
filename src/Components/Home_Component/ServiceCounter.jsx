@@ -33,7 +33,7 @@ const countResources = [
 const ServiceCounter = () => {
   
   return (
-    <div className="w-full bg-gray-50 pb-10 mt-6">
+    <div className="w-full bg-gray-50 pb-10">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-2 pt-4">
         Our Services Short View
       </h2>

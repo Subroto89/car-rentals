@@ -11,14 +11,14 @@ const Banner = () => {
           to ensure it appears above the absolute overlay */}
       <div className="relative z-10 flex flex-col items-left justify-top h-full w-full pt-20 pl-20">
         {/* Motivational Speech - The text should now be fully opaque white */}
-        <h2 className="w-4/5 md:w-3/5 lg:w-1/2 text-2xl md:text-3xl lg:text-4xl text-white text-left font-bold pt-20">
+        <h2 className="w-4/5 lg:w-1/2 text-xl md:text-3xl lg:text-4xl text-white text-left font-bold pt-20">
           Drive Your Dreams, <br />
           More Than a Car, It's Your Canvas: Craft Your Next Great Story.
         </h2>
         {/* CTA Button - Changed from Link to <a> tag to avoid routing errors */}
         <Link
           to="/available-cars"
-          className="w-2/7  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-10 text-center"
+          className="w-4/7 lg:w-2/7  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-10 text-center"
         >
           Explore Available Cars
         </Link>

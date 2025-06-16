@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'; // Assuming you use react-router-dom
+import { Link } from 'react-router';
 
 const CarGridCard = ({ car }) => {
     
@@ -10,7 +10,7 @@ const CarGridCard = ({ car }) => {
                 <h3 className="text-xl font-semibold text-gray-900">{car.carModel}</h3>
                 <p className="text-gray-700 mt-2">Daily Rent: <span className="font-bold text-blue-600">${car.dailyRent}</span></p>
                 <p className="text-gray-600">Availability: <span className={`font-semibold ${car.availability === "Available" ? "text-green-600" : "text-red-600"}`}>{car.availability}</span></p>
-                {/* You might want a better link path, e.g., /cars/${car._id} */}
+               
                 <Link 
                     to={`/car-details/${car._id}`} 
                     className="mt-4 inline-block w-full bg-blue-500 text-white py-2 px-4 rounded-md text-center hover:bg-blue-600 transition-colors duration-200"

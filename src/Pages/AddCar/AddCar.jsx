@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { GiCarKey } from "react-icons/gi";
 
 const AddCar = () => {
   const { user } = use(AuthContext);
@@ -25,7 +26,7 @@ const AddCar = () => {
 
     // Post data to database
     axios
-      .post("http://localhost:3000/add-car", data)
+      .post("http://localhost:3000/add-car", data, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {
@@ -45,19 +46,20 @@ const AddCar = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto">
-      <h2 className="text-2xl font-bold text-center mb-12">Add New Car</h2>
-      <div>
+    <div className="bg-blue-200 pt-10 pb-6">
+      <div className="w-11/12 mx-auto">
+      <div className="p-2 border border-white rounded-lg pt-10 relative">
+      <div className="flex items-center justify-center gap-2 text-2xl font-bold text-center mb-12 text-gray-800 pt-4 absolute -top-8 left-8 bg-blue-200 px-4"><GiCarKey size={28}/><h2>Add New Car</h2></div>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12"
         >
           <input
             type="text"
             name="carName"
             id="carName"
             placeholder="Car Name"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
 
           <input
@@ -65,7 +67,7 @@ const AddCar = () => {
             name="carModel"
             id="carModel"
             placeholder="Car Model"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
 
           <input
@@ -73,7 +75,7 @@ const AddCar = () => {
             name="carRegNo"
             id="carRegNo"
             placeholder="Car Registration No"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
 
           <input
@@ -81,7 +83,7 @@ const AddCar = () => {
             name="carLocation"
             id="carLocation"
             placeholder="Car Location"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
 
           <div className="col-span-2 space-y-6">
@@ -90,14 +92,14 @@ const AddCar = () => {
               name="features"
               id="features"
               placeholder="Features-seperate by comma"
-              className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+              className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
             />
 
             <textarea
               name="carDescription"
               id="carDescription"
               placeholder="Car Description"
-              className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+              className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
             />
           </div>
 
@@ -106,7 +108,7 @@ const AddCar = () => {
             name="dailyRent"
             id="dailyRent"
             placeholder="Daily Rental Price"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
 
           <input
@@ -114,10 +116,10 @@ const AddCar = () => {
             name="carPhoto"
             id="carPhoto"
             placeholder="Photo URL"
-            className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent focus:outline-none"
+            className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
-          <div className="flex items-center gap-6 border-b border-cyan-600 pl-4">
-            <h3 className="font-bold text-white">Avaiability</h3>
+          <div className="flex flex-col lg:flex-row items-center gap-6 border-b border-cyan-600 pl-4">
+            <h3 className="font-bold text-gray-800">Avaiability</h3>
             <fieldset className="flex items-center gap-2">
               <input
                 type="radio"
@@ -125,9 +127,9 @@ const AddCar = () => {
                 id="availability"
                 value="Available"
                 placeholder="Car Location"
-                className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent"
+                className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent"
               />
-              <label htmlFor="availability">Available</label>
+              <label htmlFor="availability" className="text-gray-800">Available</label>
             </fieldset>
 
             <fieldset className="flex items-center gap-2">
@@ -137,19 +139,21 @@ const AddCar = () => {
                 id="unavailability"
                 value="Not Available"
                 placeholder="Car Location"
-                className="w-full px-3 py-2 text-white border-b border-cyan-600 bg-transparent"
+                className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent"
               />
-              <label htmlFor="unavailability">Unavailable</label>
+              <label htmlFor="unavailability" className="text-gray-800">Unavailable</label>
             </fieldset>
+            
           </div>
           <button
             type="submit"
-            className="btn btn-outline hover:bg-green-400 font-bold"
+            className="btn btn-outline hover:bg-green-400 font-bold text-gray-800"
           >
             Add Car
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

@@ -18,38 +18,48 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
     setIsWindowOpen(!isWindowOpen);
   };
 
-  const handleBookingCancel = async (car) => {
+ const handleBookingCancel = async (booking) => {
     Swal.fire({
-      title: "Are you sure you want to cancel this booking?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-      }).then(async (result) => {
-      if (result.isConfirmed) {
-      const response = await axios.patch(`http://localhost:3000/booked-cars-modify/${car._id}`, { bookingStatus: false });
-      const data = response.data;
+        title: "Are you sure you want to cancel this booking?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            
+            const response = await axios.patch(`http://localhost:3000/booked-cars-modify/${booking._id}`, { bookingStatus: false });
+            const data = response.data;
 
-      if (data.acknowledged && data.modifiedCount === 1) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your booking has been cancelled successfully!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      }
-             
-      }
-    });  
-  };
+            if (data.acknowledged && data.modifiedCount === 1) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your booking has been cancelled successfully!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                
+            } else {
+                
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Already, this booking is cancelled",
+                    showConfirmButton: true,
+                });
+            }
+        }
+    });
+};
 
   return (
-    <div className="w-11/12 mx-auto">
-      <h2 className="text-white">This is my booking car page</h2>
-      <p>{carsList.length}</p>
+    <div className="bg-blue-200 pt-1 pb-6">
+      <p className="bg-blue-400 text-center font-bold text-xl mb-2 pb-2 sticky top-36">Your Total Booked Cars: {carsList.length}</p>
+      <div className="w-11/12 mx-auto">
+      
       <div className="overflow-x-auto bg-white rounded-xl shadow-2xl border border-gray-200">
         <table className="min-w-full divide-y divide-gray-800">
           <thead className="bg-gray-300">
@@ -161,6 +171,7 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
           ></BookingDateModifyWindow>
         )}
       </div>
+    </div>
     </div>
   );
 };

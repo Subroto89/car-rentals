@@ -10,6 +10,7 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const provider = new GoogleAuthProvider();
 
@@ -64,6 +65,15 @@ const AuthProvider = ({ children }) => {
       
       setUser(currentUser);
       setLoading(false);
+
+      // Hit API for Generating Token & Set It To Cookie
+     if(currentUser?.email){
+       axios.post('http://localhost:3000/jwt', {
+        email: currentUser.email
+      }, {withCredentials:true})
+      .then(res=>console.log(res.data))
+      .catch(err=>console.log(err))
+     }
     });
 
     // Cleanup function to unsubscribe from the observer when the component unmounts

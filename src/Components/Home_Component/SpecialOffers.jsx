@@ -24,6 +24,7 @@ const specialOffersData = [
     title: "Early Bird Discount",
     description: "Book 7 days in advance and save 10% on any car!",
     imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgdnGmwe1ErdyVO_7ntbKZdE6BSIWurbdo7Q&s", 
+    buttonText: "Explore Deal",
     link: "/offers/early-bird",
   },
 ];

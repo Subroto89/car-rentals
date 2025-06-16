@@ -5,8 +5,7 @@ import Swal from "sweetalert2";
 
 const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
  
-    // console.log('it is from BookingDateModifyWindow',carsList);
-    // console.log('the value is ========',selectedId)
+   
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -49,7 +48,6 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
             });
             return;
         }
-
 
           const d1 = new Date(startDate);
         const d2 = new Date(endDate);
@@ -116,7 +114,7 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
 
   return (
     <div className="w-full h-full fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="w-1/3 h-1/3 flex flex-col gap-2 bg-white rounded-md mt-28 text-gray-800 p-6">
+      <div className="w2/3 lg:w-1/3 h-1/3 flex flex-col gap-2 bg-white rounded-md mt-28 text-gray-800 p-6">
         <fieldset className="relative">
           <label>Start Date:</label>
           <input

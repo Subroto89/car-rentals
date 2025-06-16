@@ -13,15 +13,16 @@ const CarsList = ({ userEmail }) => {
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
-  const [sortOption, setSortOption] = useState('date_newest');
+  const [sortOption, setSortOption] = useState("date_newest");
 
-  
   const fetchCars = useCallback(async () => {
-  
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:3000/cars?email=${userEmail}`);
+      const response = await axios.get(
+        `http://localhost:3000/cars?email=${userEmail}`,
+        { withCredentials: true }
+      );
       setCarsData(response.data);
     } catch (err) {
       console.error("Error fetching cars:", err);
@@ -37,26 +38,31 @@ const CarsList = ({ userEmail }) => {
     fetchCars();
   }, [fetchCars]);
 
-const getStoredCars = useCallback((carsData)=>{
-  const sortedCarsData = [...carsData]
+  const getStoredCars = useCallback(
+    (carsData) => {
+      const sortedCarsData = [...carsData];
 
-   switch (sortOption) {
-            case 'date_newest':
-                return sortedCarsData.sort((a, b) => new Date(b.entryDate) - new Date(a.entryDate));
-            case 'date_oldest':
-                return sortedCarsData.sort((a, b) => new Date(a.entryDate) - new Date(b.entryDate));
-            case 'price_lowest':
-                return sortedCarsData.sort((a, b) => a.dailyRent - b.dailyRent);
-            case 'price_highest':
-                return sortedCarsData.sort((a, b) => b.dailyRent - a.dailyRent);
-            default:
-                return sortedCarsData; 
-        }
-},[sortOption])
+      switch (sortOption) {
+        case "date_newest":
+          return sortedCarsData.sort(
+            (a, b) => new Date(b.entryDate) - new Date(a.entryDate)
+          );
+        case "date_oldest":
+          return sortedCarsData.sort(
+            (a, b) => new Date(a.entryDate) - new Date(b.entryDate)
+          );
+        case "price_lowest":
+          return sortedCarsData.sort((a, b) => a.dailyRent - b.dailyRent);
+        case "price_highest":
+          return sortedCarsData.sort((a, b) => b.dailyRent - a.dailyRent);
+        default:
+          return sortedCarsData;
+      }
+    },
+    [sortOption]
+  );
 
-const displyCarsData = getStoredCars(carsData)
-
-
+  const displyCarsData = getStoredCars(carsData);
 
   const handleModalOpen = (id) => {
     setSelectedCarId(id);
@@ -69,7 +75,7 @@ const displyCarsData = getStoredCars(carsData)
     fetchCars();
   };
 
-  const handleDeleteCar = async (id) => { 
+  const handleDeleteCar = async (id) => {
     const result = await Swal.fire({
       title: "Do you want to delete?",
       text: "Once deleted, it cannot be reverted!",
@@ -128,47 +134,106 @@ const displyCarsData = getStoredCars(carsData)
   };
 
   if (loading) {
-    return <div className="text-center text-white text-xl py-8">Loading cars...</div>;
+    return (
+      <div className="text-center text-white text-xl py-8">Loading cars...</div>
+    );
   }
 
   if (error) {
-    return <div className="text-center text-red-500 text-xl py-8">Error: {error}</div>;
+    return (
+      <div className="text-center text-red-500 text-xl py-8">
+        Error: {error}
+      </div>
+    );
   }
 
   if (!carsData || carsData.length === 0) {
-    return <div className="text-center text-gray-400 text-xl py-8">No cars found for this user.</div>;
+    return (
+      <div className="text-center text-gray-400 text-xl py-8">
+        No cars found for this user.
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h2 className="text-4xl text-white text-center mb-4">You have {carsData.length} cars.</h2> {/* Updated text */}
-       <div>
-                    <label htmlFor="sort-select" className="mr-2">Sort by:</label>
-                    <select
-                        id="sort-select"
-                        value={sortOption}
-                        onChange={(e) => setSortOption(e.target.value)}
-                        className="p-2 border rounded-md"
-                    >
-                        <option value="date_newest">Date Added (Newest First)</option>
-                        <option value="date_oldest">Date Added (Oldest First)</option>
-                        <option value="price_lowest">Price (Lowest First)</option>
-                        <option value="price_highest">Price (Highest First)</option>
-                    </select>
-                </div>
+    <div className="w-full bg-blue-200 pt-1 pb-4">
+    <div className="bg-blue-400 border-b border-white py-2 sticky top-36">
+        <div className="w-11/12 mx-auto flex flex-col lg:flex-row items-center justify-between px-4">
+        <h2 className="text-xl text-white text-center mb-4">
+          You have Added {carsData.length} cars
+        </h2>{" "}
+        {/* Updated text */}
+        <div>
+          <label htmlFor="sort-select" className="mr-1 border rounded-l-md p-2 font-bold bg-blue-400">
+          Sort by:
+        </label>
+        <select
+          id="sort-select"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="p-2 border rounded-r-md text-gray-800 border-white"
+        >
+          <option value="date_newest">Date Added (Newest First)</option>
+          <option value="date_oldest">Date Added (Oldest First)</option>
+          <option value="price_lowest">Price (Lowest First)</option>
+          <option value="price_highest">Price (Highest First)</option>
+        </select>
+        </div>
+      </div>
+    </div>
       <div className="overflow-x-auto bg-white rounded-xl shadow-2xl border border-gray-200 mx-8 md:mx-16 my-8">
         <table className="min-w-full divide-y divide-gray-200">
           {/* Table Head */}
           <thead className="bg-gray-100">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model No</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Daily Rental Price</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking Count</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Availability</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entry Date</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                #
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Photo
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Model No
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Daily Rental Price
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Booking Count
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Availability
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Entry Date
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Action
+              </th>
             </tr>
           </thead>
 
@@ -181,7 +246,11 @@ const displyCarsData = getStoredCars(carsData)
               >
                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <img src={car.carPhoto} className="w-20 h-14 object-cover rounded" alt={car.carModel} />
+                  <img
+                    src={car.carPhoto}
+                    className="w-20 h-14 object-cover rounded"
+                    alt={car.carModel}
+                  />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.carModel}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{car.dailyRent}</td>

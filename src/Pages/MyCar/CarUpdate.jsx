@@ -118,7 +118,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-[100] flex justify-center items-start overflow-y-auto pt-12"> {/* Increased z-index, added flex properties for centering */}
+    <div className="fixed inset-0 bg-black/60 z-200 flex justify-center items-end overflow-y-auto pt-12 "> {/* Increased z-index, added flex properties for centering */}
       <div className="w-11/12 md:w-3/4 lg:w-1/2 mx-auto px-8 mt-10 bg-amber-50 rounded-lg text-gray-600 pb-8">
         <div className="flex justify-between items-center pt-4">
           <h2 className="text-center text-blue-500 text-2xl font-semibold ">
