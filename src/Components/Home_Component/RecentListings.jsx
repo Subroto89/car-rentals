@@ -7,7 +7,7 @@ const RecentListings = () => {
     useEffect(()=>{
        const fetchData = async() => {
          try{
-            const response = await axios.get('http://localhost:3000/recent-cars?limit=6');
+            const response = await axios.get('https://car-rentals-seven-ebon.vercel.app/recent-cars?limit=6');
             const data = response.data;
             setCars(data);
             console.log(data)

@@ -1,14 +1,14 @@
 // CarsList.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import { MdModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
-// import { Link } from "react-router"; // Not used for actions, can remove if not used for navigation
 import CarUpdate from "./CarUpdate";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "../../Components/Loader"
 
 // Receive userEmail as a prop
 const CarsList = ({ userEmail }) => {
-  const [carsData, setCarsData] = useState([]); // State to hold the cars data
+  const [carsData, setCarsData] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,7 +20,7 @@ const CarsList = ({ userEmail }) => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:3000/cars?email=${userEmail}`,
+        `https://car-rentals-seven-ebon.vercel.app/cars?email=${userEmail}`,
         { withCredentials: true }
       );
       setCarsData(response.data);
@@ -90,7 +90,7 @@ const CarsList = ({ userEmail }) => {
     if (result.isConfirmed) {
       try {
         const response = await axios.delete(
-          `http://localhost:3000/delete-car/${id}`
+          `https://car-rentals-seven-ebon.vercel.app/delete-car/${id}`
         );
 
         if (response.data && response.data.deletedCount > 0) {
@@ -135,7 +135,9 @@ const CarsList = ({ userEmail }) => {
 
   if (loading) {
     return (
-      <div className="text-center text-white text-xl py-8">Loading cars...</div>
+      <div className="text-center text-white text-xl py-8">
+        <Loader/>
+      </div>
     );
   }
 

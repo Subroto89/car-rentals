@@ -35,7 +35,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-
+f
   //----------------------------------------------------------------
   //   Function For Booking Car- For Book Now Button
   //----------------------------------------------------------------
@@ -55,7 +55,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
     };
     try {
       const response = axios.post(
-        "http://localhost:3000/book-car",
+        "https://car-rentals-seven-ebon.vercel.app/book-car",
         bookingInfo
       );
       const data = response.data;

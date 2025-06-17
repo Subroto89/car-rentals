@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
 import CarUpdate from "../Pages/MyCar/CarUpdate";
 import CarDetails from "../Pages/CarDetails/CarDetails";
+import Loader from "../Components/Loader";
 
 const router = createBrowserRouter([
   {
@@ -56,10 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/car-details/:id",
+        hydrateFallbackElement: <Loader></Loader>,
         loader: async ({ params }) => {
           
           const response = await fetch(
-            `http://localhost:3000/car/${params.id}`
+            `https://car-rentals-seven-ebon.vercel.app/car/${params.id}`
           );
 
           if (!response.ok) {

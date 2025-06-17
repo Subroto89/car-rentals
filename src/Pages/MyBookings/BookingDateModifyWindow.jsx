@@ -79,7 +79,7 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
     };
 
     try{
-        const response = await axios.patch(`http://localhost:3000/booked-cars-modify/${particularCar._id}`,modifiedData)
+        const response = await axios.patch(`https://car-rentals-seven-ebon.vercel.app/booked-cars-modify/${particularCar._id}`,modifiedData)
          const data = response.data; 
 
             console.log("Backend response data:", data);

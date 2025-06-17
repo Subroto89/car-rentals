@@ -2,6 +2,7 @@ import React, { Suspense, use } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { bookingCarsPromise } from '../../sharedFunction/bookingCarsPromiseByEmail';
 import BookingCarsList from './BookingCarsList';
+import Loader from '../../Components/Loader';
 
 
 
@@ -13,7 +14,7 @@ const MyBookings = () => {
 
     return (
         <div>
-            <Suspense fallback={<h2>Loading...</h2>}>
+            <Suspense fallback={<Loader/>}>
                 <BookingCarsList bookingCarsPromise={bookingCarsPromise(user?.email)}>
                         
                 </BookingCarsList>

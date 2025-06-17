@@ -2,6 +2,7 @@
 import React, { Suspense, use } from "react";
 import CarsList from "./CarsList";
 import { AuthContext } from "../../contexts/AuthContext"; 
+import Loader from "../../Components/Loader";
 
 const MyCars = () => {
   const { user } = use(AuthContext);
@@ -9,7 +10,7 @@ const MyCars = () => {
 
   return (
     <div>
-      <Suspense fallback={<div className="text-center text-white text-xl py-8">Loading your cars list...</div>}>
+      <Suspense fallback={<Loader/>}>
         <CarsList userEmail={user.email} />
       </Suspense>
     </div>

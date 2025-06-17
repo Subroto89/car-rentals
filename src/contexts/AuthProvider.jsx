@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
 
       // Hit API for Generating Token & Set It To Cookie
      if(currentUser?.email){
-       axios.post('http://localhost:3000/jwt', {
+       axios.post('https://car-rentals-seven-ebon.vercel.app/jwt', {
         email: currentUser.email
       }, {withCredentials:true})
       .then(res=>console.log(res.data))

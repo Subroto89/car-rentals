@@ -1,6 +1,6 @@
 export const bookingCarsPromise = async (email) => {
 
-    const response = await fetch(`http://localhost:3000/booked-cars?email=${email}`,{credentials:'include'})
+    const response = await fetch(`https://car-rentals-seven-ebon.vercel.app/booked-cars?email=${email}`,{credentials:'include'})
     const data = await response.json()
     return data
 }

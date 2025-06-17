@@ -26,7 +26,7 @@ const AddCar = () => {
 
     // Post data to database
     axios
-      .post("http://localhost:3000/add-car", data, {withCredentials:true})
+      .post("https://car-rentals-seven-ebon.vercel.app/add-car", data, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {

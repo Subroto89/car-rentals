@@ -40,7 +40,7 @@ const Navbar = () => {
       });
 
     // Remove the token from httpOnly cookie
-    axios.post("http://localhost:3000/logout", {}, { withCredentials: true });
+    axios.post("https://car-rentals-seven-ebon.vercel.app/logout", {}, { withCredentials: true });
   };
   return (
     <div className="h-36 bg-gray-50 border-b-4 border-blue-400">

@@ -30,7 +30,7 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             
-            const response = await axios.patch(`http://localhost:3000/booked-cars-modify/${booking._id}`, { bookingStatus: false });
+            const response = await axios.patch(`https://car-rentals-seven-ebon.vercel.app/booked-cars-modify/${booking._id}`, { bookingStatus: false });
             const data = response.data;
 
             if (data.acknowledged && data.modifiedCount === 1) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import CarGridCard from './CarGridCard';
 import CarListItem from './CarListItem';
+import Loader from '../../Components/Loader';
 
 const AvailableCars = () => {
     const [cars, setCars] = useState([]);
@@ -8,14 +9,14 @@ const AvailableCars = () => {
     const [error, setError] = useState(null);
     const [viewMode, setViewMode] = useState('grid');
     const [sortOption, setSortOption] = useState('date_newest');
-    const [searchTerm, setSearchTerm] = useState(''); // New state for search term
+    const [searchTerm, setSearchTerm] = useState(''); 
 
     // Function to fetch cars data
     const fetchCars = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:3000/available-cars');
+            const response = await fetch('https://car-rentals-seven-ebon.vercel.app/available-cars');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -76,7 +77,7 @@ const AvailableCars = () => {
     const filteredAndSortedCars = getSortedCars(getFilteredCars());
 
 
-    if (loading) return <div className="text-center py-8">Loading cars...</div>;
+    if (loading) return <div className="text-center py-8"><Loader/></div>;
     if (error) return <div className="text-center py-8 text-red-500">Error: {error}</div>;
 
     return (

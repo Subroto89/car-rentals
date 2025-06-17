@@ -15,7 +15,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
       setLoadingCarData(true);
       setCarDataError(null);
       try {
-        const response = await fetch(`http://localhost:3000/car/${selectedCarId}`);
+        const response = await fetch(`https://car-rentals-seven-ebon.vercel.app/car/${selectedCarId}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -78,7 +78,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
 
 
     try {
-      const res = await axios.put(`http://localhost:3000/update-car/${_id}`, data);
+      const res = await axios.put(`https://car-rentals-seven-ebon.vercel.app/update-car/${_id}`, data);
       if (res.data.acknowledged) {
         Swal.fire({
           position: "center",
