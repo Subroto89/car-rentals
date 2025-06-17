@@ -1,12 +1,35 @@
-# React + Vite
+# Go & Get Car Rentals
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Website URL: https://get-car-rentals.web.app/ 
 
-Currently, two official plugins are available:
+## About the website:
+This website provides a streamlined platform for users to easily browse, compare, and book rental cars. Its primary goal is to simplify the car rental process, offering a convenient and efficient solution for travelers and individuals needing temporary transportation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features:
+<li>Car Addition</li>
+<li>Car Info Modification Facility</li>
+<li>Car Deletion If Needed</li>
+<li>Searching Registered Cars</li>
+<li>Available Car Browsing</li>
+<li>Easy Booking</li>
+<li>Booking Modification Facility</li>
+<li>Booking Cancellation Facility</li>
+<li>Booking Cancellation Facility</li>
+<li>Exclusive Offers For Client Ease</li>
+<li>Recent Added Cars Browsing Facility</li>
 
-## Expanding the ESLint configuration
+## NPM Packages:
+<li>react-router</li>
+<li>tailwindcss</li>
+<li>react</li>
+<li>firebase</li>
+<li>react-icons</li>
+<li>react-countup</li>
+<li>react-intersection-observer</li>
+<li>react-visibility-sensor</li>
+<li>motion</li>
+<li>framer-motion</li>
+<li>axios</li>
+<li>lottie-react</li>
+<li>sweetalert2</li>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
