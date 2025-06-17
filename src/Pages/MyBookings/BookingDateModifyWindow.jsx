@@ -4,8 +4,7 @@ import { FaRegCalendarDays } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
 const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
- 
-   
+    // ************************************
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -23,10 +22,9 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
         0,
         differenceInTime / (1000 * 60 * 60 * 24)
       );
-      console.log(differenceInDays)
-      console.log(particularCar)
+      
       setTotalCost(differenceInDays * particularCar.dailyRent);
-      console.log(totalCost)
+     
     }
   }, [startDate, endDate, particularCar.dailyRent]);
 
@@ -91,7 +89,7 @@ const BookingDateModifyWindow = ({ handleIsWindowOpen, particularCar }) => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                handleIsWindowOpen(); // Close the window on successful update
+                handleIsWindowOpen(data); // Close the window on successful update
     }else if (data.acknowledged && data.matchedCount === 1 && data.modifiedCount === 0) {
                  Swal.fire({
                     icon: "info",

@@ -4,6 +4,7 @@ import Facility from '../../Components/Home_Component/Facility';
 import ServiceCounter from '../../Components/Home_Component/ServiceCounter';
 import SpecialOffers from '../../Components/Home_Component/SpecialOffers';
 import RecentListings from '../../Components/Home_Component/RecentListings';
+import FAQ from '../../Components/Home_Component/FAQ';
 
 const Home = () => {
     const facilitiesPromise = fetch('facilities.json').then(res => res.json());
@@ -25,6 +26,9 @@ const Home = () => {
 
            {/* Counter Component */}
            <ServiceCounter></ServiceCounter>
+
+           {/* FAQ Component */}
+           <FAQ></FAQ>
 
         </div>
     );
