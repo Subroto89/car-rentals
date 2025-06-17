@@ -1,6 +1,6 @@
 # Go & Get Car Rentals
 
-# Website URL: https://get-car-rentals.web.app/ 
+## Website URL: https://get-car-rentals.web.app/ 
 
 ## About the website:
 This website provides a streamlined platform for users to easily browse, compare, and book rental cars. Its primary goal is to simplify the car rental process, offering a convenient and efficient solution for travelers and individuals needing temporary transportation.
