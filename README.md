@@ -36,7 +36,7 @@ This website provides a streamlined platform for users to easily browse, compare
 ![image alt](https://github.com/Subroto89/car-rentals/blob/004e66fb7eb208fbab6e927eea447c2200e2c1ec/carRental-Home.png)
 ![image alt](https://github.com/Subroto89/car-rentals/blob/de10acc8c0148b8579dbe7acbe13fea6bf123aff/myBookings.png)
 
-🚀 Getting Started
+🚀 Getting Started <br/>
 This project is a full-stack application with separate directories for the client-side (front-end) and server-side (back-end). Follow the instructions below to set up and run the application locally.
 
 Prerequisites
