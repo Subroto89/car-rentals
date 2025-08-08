@@ -33,3 +33,4 @@ This website provides a streamlined platform for users to easily browse, compare
 <li>lottie-react</li>
 <li>sweetalert2</li>
 
+![image alt](https://github.com/Subroto89/car-rentals/blob/004e66fb7eb208fbab6e927eea447c2200e2c1ec/carRental-Home.png)
