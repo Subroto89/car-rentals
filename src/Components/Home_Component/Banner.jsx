@@ -10,7 +10,7 @@ const Banner = () => {
 
       {/* Content container, positioned relatively and given a higher z-index
           to ensure it appears above the absolute overlay */}
-      <div className="relative z-10 flex flex-col items-left justify-top h-full w-full pt-20 pl-20">
+      <div className="w-11/12 mx-auto relative z-10 flex flex-col items-left justify-top h-full pt-20">
         {/* Motivational Speech - The text should now be fully opaque white */}
         <motion.h2 animate={{color:['#ff0022', '#2cff02', '#008350', '#ffffff'], transition:{duration:6, repeat:Infinity}}} className="w-4/5 lg:w-1/2 text-xl md:text-3xl lg:text-4xl text-white text-left font-bold pt-20">
           Drive Your Dreams, <br />
