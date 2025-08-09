@@ -35,7 +35,7 @@ const BookingWindow = ({ modalClose, carInfo }) => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-f
+
   //----------------------------------------------------------------
   //   Function For Booking Car- For Book Now Button
   //----------------------------------------------------------------

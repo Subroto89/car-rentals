@@ -12,7 +12,7 @@ const RootLayout = () => {
       <main className="min-h-screen">
         <Outlet></Outlet>
       </main>
-      <footer className="my-10">
+      <footer>
         <Footer></Footer>
       </footer>
     </div>

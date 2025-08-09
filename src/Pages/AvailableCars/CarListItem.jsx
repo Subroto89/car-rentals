@@ -13,7 +13,7 @@ const CarListItem = ({ car }) => {
             </div>
             <Link 
                 to={`/car-details/${car._id}`} 
-                className="flex-shrink-0 bg-blue-500 text-white py-2 px-4 rounded-md text-sm lg:text-md text-center hover:bg-blue-600 transition-colors duration-200"
+                className="flex-shrink-0 bg-blue-400 text-white py-2 px-4 rounded-md text-sm lg:text-md text-center hover:bg-blue-500 transition-colors duration-200"
             >
                 Book Now
             </Link>

@@ -43,7 +43,7 @@ const Navbar = () => {
     axios.post("https://car-rentals-seven-ebon.vercel.app/logout", {}, { withCredentials: true });
   };
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 border-b border-blue-400">
       <div className="w-11/12 mx-auto flex items-center justify-between py-2">
         {/* Logo & Institution Name */}
         <div>

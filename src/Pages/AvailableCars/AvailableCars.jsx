@@ -81,23 +81,23 @@ const AvailableCars = () => {
     if (error) return <div className="text-center py-8 text-red-500">Error: {error}</div>;
 
     return (
-        <div className="w-full p-4 bg-blue-200 pb-6">
+        <div className="w-full bg-gray-50 pb-6">
          <div className='w-11/12 mx-auto'>
-               <h1 className="text-3xl font-bold mb-1 text-gray-800">Available Cars</h1>
+               <h1 className="text-2xl font-semibold mb-1 text-gray-800">Available Cars</h1>
 
             {/* Controls: View Toggle and Sorting */}
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center py-3 mb-6 bg-white rounded-t-lg h-30 lg:h-16 px-4 border border-blue-700">
+            <div className="sticky top-[59px] z-50 flex flex-col lg:flex-row justify-between items-start lg:items-center py-3 mb-6 bg-white rounded-t-lg h-30 lg:h-16 px-4 border border-gray-300">
                 {/* View Toggle Buttons */}
                 <div>
                     <button
                         onClick={() => setViewMode('grid')}
-                        className={`px-2 lg:px-4 py-2 rounded-l-md ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                        className={`px-2 lg:px-4 py-2 rounded-l-md ${viewMode === 'grid' ? 'bg-blue-400 text-white' : 'bg-gray-200 text-gray-800'}`}
                     >
                         Grid View
                     </button>
                     <button
                         onClick={() => setViewMode('list')}
-                        className={`px-2 lg:px-4 py-2 rounded-r-md ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                        className={`px-2 lg:px-4 py-2 rounded-r-md ${viewMode === 'list' ? 'bg-blue-400 text-white' : 'bg-gray-200 text-gray-800'}`}
                     >
                         List View
                     </button>
@@ -106,12 +106,12 @@ const AvailableCars = () => {
                <div className='flex gap-2'>
                  {/* Search Bar */}
                 <div className=' flex items-center text-gray-600'>
-                    <label htmlFor="search" className='bg-blue-500 bourder-l rounded-l-md text-white py-1 lg:px-2 text-xs  '>Brand, Model, or Location</label> 
+                    <label htmlFor="search" className='bg-blue-400 bourder-l rounded-l-md text-white py-1 lg:px-2 text-xs  '>Brand, Model, or Location</label> 
                     <input
                         type="search"
                         name="search"
                         id="search"
-                        className='w-full rounded-r-md p-2 py-2.5 border-2 border-gray-600 bg-blue-300 text-gray-800 text-xs' 
+                        className='w-full rounded-r-md p-2 py-2.5 border-2 border-gray-600 bg-blue-100 text-gray-800 text-xs' 
                         placeholder="e.g., Toyota, Camry, Dhaka" 
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)} 
@@ -121,12 +121,12 @@ const AvailableCars = () => {
 
                 {/* Sorting Dropdown */}
                 <div className='flex items-center text-gray-600'>
-                    <label htmlFor="sort-select" className='bg-blue-500 bourder-l rounded-l-md text-white py-1 lg:px-2 text-xs  '>Sort by:</label>
+                    <label htmlFor="sort-select" className='bg-blue-400 bourder-l rounded-l-md text-white py-1 lg:px-2 text-xs  '>Sort by:</label>
                     <select
                         id="sort-select"
                         value={sortOption}
                         onChange={(e) => setSortOption(e.target.value)}
-                         className='w-full rounded-r-md px-2 py-2 border-2 border-gray-600 bg-blue-300 text-gray-800 text-xs'
+                         className='w-full rounded-r-md px-2 py-2 border-2 border-gray-600 bg-blue-100 text-gray-800 text-xs'
                     >
                         <option value="date_newest">Date Added (Newest First)</option>
                         <option value="date_oldest">Date Added (Oldest First)</option>
@@ -141,7 +141,7 @@ const AvailableCars = () => {
             {filteredAndSortedCars.length === 0 ? (
                 <p className="text-center text-lg">No cars found based on current criteria.</p>
             ) : viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {filteredAndSortedCars.map(car => (
                         <CarGridCard key={car._id} car={car} />
                     ))}
