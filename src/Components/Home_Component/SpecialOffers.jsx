@@ -42,9 +42,9 @@ const containerVariants = {
 
 const SpecialOffers = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="pt-12 bg-gray-50">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-extrabold text-gray-900 mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">
           Exclusive Special Offers
         </h2>
         <motion.div

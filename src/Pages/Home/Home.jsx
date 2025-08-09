@@ -5,6 +5,7 @@ import ServiceCounter from '../../Components/Home_Component/ServiceCounter';
 import SpecialOffers from '../../Components/Home_Component/SpecialOffers';
 import RecentListings from '../../Components/Home_Component/RecentListings';
 import FAQ from '../../Components/Home_Component/FAQ';
+import Loader from '../../Components/Loader';
 
 const Home = () => {
     const facilitiesPromise = fetch('facilities.json').then(res => res.json());
@@ -13,8 +14,8 @@ const Home = () => {
            {/* Banner Component */}
            <Banner></Banner>
 
-           {/* Why Choose Use Component */}
-           <Suspense fallback={<div className="text-center text-gray-500">Loading facilities...</div>}>
+           {/* Why Choose Us Component */}
+           <Suspense fallback={<Loader />}>
                 <Facility facilities={facilitiesPromise} />
            </Suspense>
 

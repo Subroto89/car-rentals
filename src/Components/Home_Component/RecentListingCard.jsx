@@ -25,7 +25,7 @@ const RecentListingCard = ({ car }) => {
   //    const postedTimeAgo = Math.ceil(Math.abs(todayDate - postDate) / (1000 * 60 * 60 * 24)) ;
 
   return (
-    <div className="text-xl text-gray-800 bg-white rounded-lg shadow-lg hover:scale-102 p-4">
+    <div className="text-xl text-gray-800 bg-white rounded-lg shadow-md hover:scale-102 p-4">
       <figure className="w-full h-46 overflow-hidden rounded-lg border border-gray-200">
         <img
           src={carPhoto}

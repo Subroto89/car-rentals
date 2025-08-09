@@ -3,7 +3,7 @@ import Lottie from "lottie-react"
 import faq from "../../assets/lotties/faq.json"
 const FAQ = () => {
   return (
-    <div className="w-full bg-gray-50 text-gray-700 py-4">
+    <div className="w-full bg-gray-50 text-gray-700 py-12">
       <div className="w-11/12 mx-auto">
       
       <div className="flex justify-center items-center"><Lottie animationData={faq} style={{width:'200px'}} ></Lottie></div>

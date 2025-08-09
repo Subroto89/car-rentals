@@ -11,7 +11,7 @@ const cardVariants = {
 const OfferCard = ({ offer }) => {
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-all duration-300 ease-in-out"
+      className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center transform transition-all duration-300 ease-in-out"
       variants={cardVariants}
       whileHover={{ scale: 1.03, y: -5 }} // Bounce slightly on hover (scale up and move up)
       transition={{ type: "spring", stiffness: 300, damping: 10 }} // Spring physics for a natural bounce

@@ -33,11 +33,10 @@ const countResources = [
 const ServiceCounter = () => {
   
   return (
-    <div className="w-full bg-gray-50 pb-10">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-2 pt-4">
+    <div className="w-full bg-gray-50 pt-12">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-2 pb-4">
         Our Services Short View
       </h2>
-      <hr className="border-2 border-gray-300 mx-[600px] mb-6" />
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-800 text-2xl font-bold">
         {
           countResources.map((resource,index) => (<CountUpCard key={index} resource={resource} ></CountUpCard>))
