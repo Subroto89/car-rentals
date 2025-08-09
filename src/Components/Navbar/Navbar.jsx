@@ -43,14 +43,14 @@ const Navbar = () => {
     axios.post("https://car-rentals-seven-ebon.vercel.app/logout", {}, { withCredentials: true });
   };
   return (
-    <div className="h-36 bg-gray-50 border-b-4 border-blue-400">
-      <div className="w-11/12 mx-auto flex items-center justify-between relative">
+    <div className="bg-gray-50">
+      <div className="w-11/12 mx-auto flex items-center justify-between py-2">
         {/* Logo & Institution Name */}
         <div>
           <figure>
-            <img src={logo} alt="logo" className="w-40 mx-auto pt-10" />
+            <img src={logo} alt="logo" className="w-18 mx-auto" />
           </figure>
-          <h1 className="absolute left-2 -bottom-4 text-sm font-bold text-center text-blue-700 pt-4">
+          <h1 className="text-xs font-bold text-center text-blue-500">
             Go & Get Car Rentals
           </h1>
         </div>
@@ -62,7 +62,7 @@ const Navbar = () => {
               <NavLink
                 key={index}
                 to={link.linkPath}
-                className="btn text-xl font-semibold bg-transparent text-blue-400 px-1 mx-2 mt-10 hover:border-b-2 hover:border-b-cyan-500"
+                className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-2 hover:border-b-2 hover:border-b-cyan-500"
               >
                 {link.linkName}
               </NavLink>
@@ -76,7 +76,7 @@ const Navbar = () => {
                 <NavLink
                   key={index}
                   to={link.linkPath}
-                  className="btn text-xl font-semibold bg-transparent text-blue-400 px-1 mx-2 mt-10 hover:border-b-2 hover:border-b-cyan-500"
+                  className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-2 hover:border-b-2 hover:border-b-cyan-500"
                 >
                   {link.linkName}
                 </NavLink>
@@ -90,8 +90,8 @@ const Navbar = () => {
         {/* Register, Sign In & Log Out Buttons */}
         <div className="hidden lg:block">
           {user ? (
-            <div className="flex items-center space-x-4 bg-transparent text-blue-400 px-1 mx-2 mt-10">
-              <Link onClick={handleSignOut} className="btn btn-outline text-xl">
+            <div className="flex items-center space-x-4 bg-transparent text-blue-400 px-1">
+              <Link onClick={handleSignOut} className="btn btn-outline text-md">
                 <MdLogout /> Sign Out
               </Link>
 
@@ -106,17 +106,17 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/register" className="btn btn-outline text-xl mr-6 bg-transparent text-blue-400 px-1 mx-2 mt-10">
+              <Link to="/register" className="btn btn-outline text-md mr-1 bg-transparent text-blue-400 px-1 mx-2">
                 <MdAccountCircle /> Register
               </Link>
-              <Link to="/signin" className="btn btn-outline text-xl bg-transparent text-blue-400 px-1 mx-2 mt-10">
+              <Link to="/signin" className="btn btn-outline text-md bg-transparent text-blue-400 px-1">
                 <MdLogin /> Sign In
               </Link>
             </>
           )}
         </div>
         {/* Hamburger For Mobile Screen */}
-        <div className="block lg:hidden text-blue-400 mt-10">
+        <div className="block lg:hidden text-blue-400">
           {
             open ? <RxCross1 size={34} onClick={handleToggleSideBar} className="border p-2"/> : <RxHamburgerMenu size={40} onClick={handleToggleSideBar} className="border p-2"/> 
           }
