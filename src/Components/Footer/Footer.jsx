@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
             <div>
               <h3 className="text-md font-semibold">Call For Car</h3>
-              <p className="text-sm font-bold text-gray-50">+880-1710-000000</p>
+              <p className="text-sm font-bold text-gray-50">+1 (123) 456-7890</p>
             </div>
           </div>
         </div>
@@ -64,11 +64,11 @@ const Footer = () => {
             <h2 className="pb-6">Useful Links</h2>
             <div>
               <ul className="flex flex-col gap-3 text-sm">
-                <Link>Taxi Booking</Link>
+                <Link>Car Booking</Link>
                 <Link>Help Center</Link>
                 <Link>Privacy and Policy</Link>
                 <Link>Terms of Use</Link>
-                <Link>Contact Us</Link>
+                <Link to="/contact-us">Contact Us</Link>
               </ul>
             </div>
           </div>
@@ -77,7 +77,11 @@ const Footer = () => {
             <h2 className="pb-6">Head Office</h2>
             <div className="text-sm flex flex-col gap-3">
               <h3>Location:</h3>
-              <p>1234 Main Street, City, State, MT 03800</p>
+              <p>
+                123 Car Street, Suite 456 <br />
+                Rentals City, TX 78701 <br />
+                USA
+              </p>
 
               <h3>JOIN US:</h3>
               <p>info@goandgetcar.com</p>
@@ -146,12 +150,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      <div className="text-center text-white text-sm bg-black/10 pb-2">
-        <p>@2025 All Rights Reserved.</p>
+        <div className="text-center text-white text-sm bg-black/10 pb-2">
+          <p>@2025 All Rights Reserved.</p>
+        </div>
       </div>
-      </div>
-
-      
     </div>
   );
 };

@@ -13,6 +13,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import CarUpdate from "../Pages/MyCar/CarUpdate";
 import CarDetails from "../Pages/CarDetails/CarDetails";
 import Loader from "../Components/Loader";
+import ContactUs from "../Pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/contact-us",
+        Component: ContactUs
+      }
     ],
   },
   {
