@@ -8,7 +8,7 @@ const Footer = () => {
     <div className="h-auto bg-gray-200">
       <div className="bg-black opacity-90 h-full w-full">
         {/* Footer - Top Part */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-10/12 mx-auto mb-4">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-11/12 mx-auto mb-4">
           {/* Logo & Institution Name */}
           <div className="pt-12">
             <figure>
@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
 
         {/* Footer-Middle Part */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-4 p-16 w-11/12 mx-auto text-sm font-bold ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-4 w-11/12 mt-16 mb-10 mx-auto text-sm font-bold ">
           <div>
             <h2 className="pb-6">Working Hours</h2>
 
