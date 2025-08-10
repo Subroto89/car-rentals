@@ -4,6 +4,9 @@ import CarListItem from './CarListItem';
 import Loader from '../../Components/Loader';
 
 const AvailableCars = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

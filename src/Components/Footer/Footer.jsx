@@ -64,10 +64,10 @@ const Footer = () => {
             <h2 className="pb-6">Useful Links</h2>
             <div>
               <ul className="flex flex-col gap-3 text-sm">
-                <Link>Car Booking</Link>
+                <Link to="/available-cars">Car Booking</Link>
                 <Link to="/help-center">Help Center</Link>
                 <Link to="/privacypolicy">Privacy and Policy</Link>
-                <Link>Terms of Use</Link>
+                <Link to="/terms-of-use">Terms of Use</Link>
                 <Link to="/contact-us">Contact Us</Link>
               </ul>
             </div>
