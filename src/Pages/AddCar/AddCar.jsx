@@ -46,13 +46,13 @@ const AddCar = () => {
   };
 
   return (
-    <div className="bg-blue-200 pt-10 pb-6">
+    <div className="bg-blue-100 pt-10 pb-6">
       <div className="w-11/12 mx-auto">
       <div className="p-2 border border-white rounded-lg pt-10 relative">
-      <div className="flex items-center justify-center gap-2 text-2xl font-bold text-center mb-12 text-gray-800 pt-4 absolute -top-8 left-8 bg-blue-200 px-4"><GiCarKey size={28}/><h2>Add New Car</h2></div>
+      <div className="flex items-center justify-center gap-2 text-2xl font-semibold text-center mb-12 text-gray-800 pt-4 absolute -top-8 left-8 bg-blue-100 px-4"><GiCarKey size={28}/><h2>Add New Car</h2></div>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 "
         >
           <input
             type="text"

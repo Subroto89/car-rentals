@@ -99,7 +99,7 @@ const CarsList = ({ userEmail }) => {
             text: "Your car entry has been deleted successfully.",
             icon: "success",
           });
-          // CRITICAL: Re-fetch data after successful deletion
+          // Re-fetch data after successful deletion
           fetchCars();
         } else {
           Swal.fire({
@@ -158,12 +158,12 @@ const CarsList = ({ userEmail }) => {
   }
 
   return (
-    <div className="w-full bg-blue-200 pt-1 pb-4">
-    <div className="bg-blue-400 border-b border-white py-2 sticky top-36">
+    <div className="w-full h-screen bg-blue-100 pt-1 pb-4">
+    <div className="w-11/12 mx-auto sticky top-[64px] z-50 bg-blue-50 border-b border-white py-2">
         <div className="w-11/12 mx-auto flex flex-col lg:flex-row items-center justify-between px-4">
-        <h2 className="text-xl text-white text-center mb-4">
+        <h2 className="text-xl text-gray-700 text-center mb-4 font-semibold">
           You have Added {carsData.length} cars
-        </h2>{" "}
+        </h2>
         {/* Updated text */}
         <div>
           <label htmlFor="sort-select" className="mr-1 border rounded-l-md p-2 font-bold bg-blue-400">
@@ -183,10 +183,10 @@ const CarsList = ({ userEmail }) => {
         </div>
       </div>
     </div>
-      <div className="overflow-x-auto bg-white rounded-xl shadow-2xl border border-gray-200 mx-8 md:mx-16 my-8">
+      <div className="w-11/12 mx-auto overflow-x-auto bg-white rounded-md shadow-md border border-gray-200 my-8">
         <table className="min-w-full divide-y divide-gray-200">
           {/* Table Head */}
-          <thead className="bg-gray-100">
+          <thead className="sticky top-0 z-40 bg-gray-100">
             <tr>
               <th
                 scope="col"
