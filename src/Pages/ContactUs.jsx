@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa"; // Import React Icons
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa"; 
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ const ContactUs = () => {
     message: "",
   });
 
-  const [status, setStatus] = useState(""); // To display submission status
+  const [status, setStatus] = useState(""); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,18 +19,18 @@ const ContactUs = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
 
-    // Basic validation
+   
     if (!formData.name || !formData.email || !formData.message) {
       setStatus("Please fill in all fields.");
       return;
     }
 
-    // Simulate sending data (in a real app, you'd send this to your backend)
-    console.log("Form data submitted:", formData);
+
+   
     setStatus("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", message: "" }); // Clear form
+    setFormData({ name: "", email: "", message: "" }); 
   };
 
   useEffect(() => {
@@ -55,21 +55,21 @@ const ContactUs = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <FaPhone className="h-6 w-6 text-indigo-600 mr-3" />{" "}
-                {/* Replaced SVG with React Icon */}
+                
                 <span className="text-gray-800 font-inter">
                   +1 (123) 456-7890
                 </span>
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="h-6 w-6 text-indigo-600 mr-3" />{" "}
-                {/* Replaced SVG with React Icon */}
+                
                 <span className="text-gray-800 font-inter">
                   info@goandgetcar.com
                 </span>
               </div>
               <div className="flex items-start">
                 <FaMapMarkerAlt className="h-6 w-6 text-indigo-600 mr-3 flex-shrink-0 mt-1" />{" "}
-                {/* Replaced SVG with React Icon */}
+                
                 <address className="text-gray-800 not-italic font-inter">
                   123 Car Street, Suite 456 <br />
                   Rentals City, TX 78701 <br />

@@ -65,7 +65,7 @@ const Footer = () => {
             <div>
               <ul className="flex flex-col gap-3 text-sm">
                 <Link>Car Booking</Link>
-                <Link>Help Center</Link>
+                <Link to="/help-center">Help Center</Link>
                 <Link>Privacy and Policy</Link>
                 <Link>Terms of Use</Link>
                 <Link to="/contact-us">Contact Us</Link>

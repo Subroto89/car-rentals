@@ -14,6 +14,7 @@ import CarUpdate from "../Pages/MyCar/CarUpdate";
 import CarDetails from "../Pages/CarDetails/CarDetails";
 import Loader from "../Components/Loader";
 import ContactUs from "../Pages/ContactUs";
+import HelpCenter from "../Pages/HelpCenter";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "/contact-us",
         Component: ContactUs
+      },
+      {
+        path: "/help-center",
+        Component: HelpCenter
       }
     ],
   },
