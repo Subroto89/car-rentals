@@ -10,6 +10,7 @@ import SideNav from "./SideNav";
 import { AuthContext } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import ThemeToggle from "../../../src/Components/ThemeToggle"
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -67,6 +68,7 @@ const Navbar = () => {
                 {link.linkName}
               </NavLink>
             ))}
+            
           </div>
 
           {/* Navigation Links - Users Only*/}
@@ -85,6 +87,7 @@ const Navbar = () => {
           ) : (
             ""
           )}
+          <ThemeToggle/>
         </div>
 
         {/* Register, Sign In & Log Out Buttons */}

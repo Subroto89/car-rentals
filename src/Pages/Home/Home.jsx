@@ -10,7 +10,7 @@ import Loader from '../../Components/Loader';
 const Home = () => {
     const facilitiesPromise = fetch('facilities.json').then(res => res.json());
     return (
-        <div className=''>
+        <div className='dark:bg-gray-800'>
            {/* Banner Component */}
            <Banner></Banner>
 
