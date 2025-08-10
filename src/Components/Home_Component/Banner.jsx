@@ -19,7 +19,7 @@ const Banner = () => {
         {/* CTA Button - Changed from Link to <a> tag to avoid routing errors */}
         <Link
           to="/available-cars"
-          className="w-4/7 lg:w-2/7  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-10 text-center"
+          className="w-4/7 lg:w-2/7  bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full mt-10 text-center"
         >
           Explore Available Cars
         </Link>
