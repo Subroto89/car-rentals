@@ -7,13 +7,13 @@ import Swal from "sweetalert2";
 import { FaRegTrashAlt } from "react-icons/fa";
 import {
   LineChart,
-  Line, // <--- Crucial: You need Line
+  Line,
   XAxis,
   YAxis,
-  CartesianGrid, // <--- Crucial: You need CartesianGrid
+  CartesianGrid, 
   Tooltip,
-  Legend, // <--- Crucial: You need Legend
-  ResponsiveContainer, // Optional: for responsive charts
+  Legend, 
+  ResponsiveContainer, 
 } from "recharts";
 
 const BookingCarsList = ({ bookingCarsPromise }) => {
@@ -64,54 +64,54 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
   };
 
   return (
-    <div className="bg-blue-200 pt-1 pb-6">
-      <p className="bg-blue-400 text-center font-bold text-xl mb-2 pb-2 sticky top-36">
+    <div className="bg-blue-100 pt-1 pb-6">
+      <p className="w-11/12 mx-auto bg-blue-50 text-center font-bold text-gray-700 text-xl mb-2 pb-2 sticky top-16">
         Your Total Booked Cars: {carsList.length}
       </p>
       <div className="w-11/12 mx-auto">
-        <div className="overflow-x-auto bg-white rounded-xl shadow-2xl border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-800">
-            <thead className="bg-gray-300">
+        <div className="overflow-x-auto bg-white rounded-md shadow-md ">
+          <table className="min-w-full divide-y divide-gray-300">
+            <thead className="bg-blue-50 text-sm text-gray-500">
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   #
                 </th>
                 <th
                   scope="col"
-                  className="px-2 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-2 py-3 text-left whitespace-nowrap uppercase tracking-wider"
                 >
                   Car Photo
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   Model
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   Booking Date
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   Total Price
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   Booking Status
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-md font-bold text-blue-400 uppercase tracking-wider"
+                  className="px-6 py-3 text-left uppercase tracking-wider"
                 >
                   <div className="flex items-center gap-4 justify-center">
                     Action
@@ -120,7 +120,7 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className=" divide-y divide-gray-200">
+            <tbody className=" divide-y divide-gray-100">
               {carsList.map((car, index) => (
                 <tr
                   key={index}
@@ -186,7 +186,7 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
 
      
       {/* Recharts Integration: dailyRent on X-axis, totalPrice on Y-axis */}
-      <div className="w-11/12 mx-auto mt-8 p-4 bg-white rounded-xl shadow-2xl">
+      <div className="w-11/12 mx-auto mt-8 p-4 bg-white rounded-md shadow-2xl">
         <h3 className="text-center font-bold text-xl mb-4 text-blue-500">
           Booking Total Price(aggregating daily rent) by Car Model
         </h3>

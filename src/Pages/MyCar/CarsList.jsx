@@ -191,7 +191,7 @@ const CarsList = ({ userEmail }) => {
       <div className="w-11/12 mx-auto overflow-auto bg-white rounded-md shadow-md border border-gray-200 my-8">
         <table className="min-w-full divide-y divide-gray-200">
           {/* Table Head */}
-          <thead className="sticky top-0 z-40 bg-gray-100">
+          <thead className="sticky -top-0 z-40 bg-gray-100">
             <tr>
               <th
                 scope="col"
