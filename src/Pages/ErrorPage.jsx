@@ -7,17 +7,17 @@ const ErrorPage = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center min-h-lvh space-y-5">
-        <p className="text-4xl font-bold text-center">
+        <p className="text-4xl font-bold text-red-600 text-center">
           <Lottie
             animationData={pageNotFound}
             style={{ width: "500px", margin: "0 auto" }}
           />
-          Oops! Page Not Fount
+          Oops! Page Not Found
         </p>
 
         <Link
           to="/"
-          className="border-1 border-red-300 px-6 py-3 bg-amber-600 shadow rounded-lg"
+          className="border-1 border-red-300 px-6 py-3 bg-amber-600 hover:bg-blue-400 shadow rounded-lg"
         >
           Go Back Home
         </Link>
