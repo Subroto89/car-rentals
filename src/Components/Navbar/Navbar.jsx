@@ -63,7 +63,7 @@ const Navbar = () => {
               <NavLink
                 key={index}
                 to={link.linkPath}
-                className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-2 hover:border-b-2 hover:border-b-cyan-500"
+                className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-1 hover:border-b-2 hover:border-b-cyan-500"
               >
                 {link.linkName}
               </NavLink>
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <NavLink
                   key={index}
                   to={link.linkPath}
-                  className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-2 hover:border-b-2 hover:border-b-cyan-500"
+                  className="btn text-md font-semibold bg-transparent text-blue-400 px-1 mx-1 hover:border-b-2 hover:border-b-cyan-500"
                 >
                   {link.linkName}
                 </NavLink>
