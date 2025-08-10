@@ -118,8 +118,8 @@ const AddCar = () => {
             placeholder="Photo URL"
             className="w-full px-3 py-2  border-b border-cyan-600 bg-transparent focus:outline-none text-gray-800"
           />
-          <div className="flex flex-col lg:flex-row items-center gap-6 border-b border-cyan-600 pl-4">
-            <h3 className="font-bold text-gray-800">Avaiability</h3>
+          <div className="relative flex flex-row items-center gap-6 border-b border-cyan-600">
+            <h3 className="font-bold text-gray-800 block">Avaiability</h3>
             <fieldset className="flex items-center gap-2">
               <input
                 type="radio"
@@ -143,11 +143,18 @@ const AddCar = () => {
               />
               <label htmlFor="unavailability" className="text-gray-800">Unavailable</label>
             </fieldset>
+            <button
+            type="submit"
+            className="btn btn-outline w-26 sm:w-50 md:w-52 absolute -right-64   lg:hidden text-xs hover:bg-green-400 font-bold text-gray-800"
+          >
+            Add Car
+          </button>
             
           </div>
+            
           <button
             type="submit"
-            className="btn btn-outline hover:bg-green-400 font-bold text-gray-800"
+            className="btn btn-outline hidden lg:block hover:bg-green-400 font-bold text-gray-800"
           >
             Add Car
           </button>
