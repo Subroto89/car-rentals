@@ -145,7 +145,7 @@ const AddCar = () => {
             </fieldset>
             <button
             type="submit"
-            className="btn btn-outline w-26 sm:w-50 md:w-52 absolute -right-64   lg:hidden text-xs hover:bg-green-400 font-bold text-gray-800"
+            className="btn btn-outline w-26 sm:w-50 md:w-52 absolute -right-64   lg:hidden text-xs hover:bg-blue-400 font-bold text-gray-800"
           >
             Add Car
           </button>
@@ -154,7 +154,7 @@ const AddCar = () => {
             
           <button
             type="submit"
-            className="btn btn-outline hidden lg:block hover:bg-green-400 font-bold text-gray-800"
+            className="btn btn-outline hidden lg:block hover:bg-blue-400 font-bold text-gray-800"
           >
             Add Car
           </button>

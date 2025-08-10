@@ -281,7 +281,7 @@ const CarsList = ({ userEmail }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center gap-4">
                   <button
                     onClick={() => handleModalOpen(car._id)}
-                    className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-green-300 cursor-pointer group"
+                    className="border border-gray-300 p-2 px-3 rounded-lg hover:bg-blue-400 cursor-pointer group"
                     title="Edit Car"
                   >
                     <MdModeEdit

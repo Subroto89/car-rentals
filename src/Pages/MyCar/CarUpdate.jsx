@@ -206,7 +206,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
             defaultValue={carPhoto}
             className="w-full px-3 py-2 text-gray-600 border-b border-cyan-600 bg-transparent focus:outline-none"
           />
-          <div className="flex items-center gap-6 border-b border-cyan-600 pl-4 bg-amber-50">
+          <div className="flex items-center gap-6 border-b border-cyan-600 pl-4 bg-amber-50 pr-20">
             <h3 className="font-bold text-gray-600">Availability</h3>
             <fieldset className="flex items-center gap-2">
               <input
@@ -233,6 +233,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
               />
               <label htmlFor="unavailableRadio">Unavailable</label>
             </fieldset>
+             
           </div>
           <button
             type="submit"
@@ -240,6 +241,7 @@ const CarUpdate = ({ selectedCarId, handleModalClose }) => {
           >
             Update
           </button>
+         
         </form>
       </div>
     </div>

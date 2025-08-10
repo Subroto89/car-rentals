@@ -154,15 +154,15 @@ const BookingCarsList = ({ bookingCarsPromise }) => {
                     <div className="flex items-center justify-center gap-2">
                       <div
                         onClick={() => handleIsWindowOpen(car)}
-                        className="flex items-center gap-2 bg-blue-400 px-2 py-1 text-white rounded-md shadow-xl cursor-pointer btn"
+                        className="flex items-center gap-2 bg-blue-300 hover:bg-blue-400 px-2 py-1 text-white rounded-md shadow-xl cursor-pointer btn"
                       >
-                        {" "}
+                        
                         <MdOutlineCalendarMonth />
                         Modify Date
                       </div>
                       <div
                         onClick={() => handleBookingCancel(car)}
-                        className="flex items-center gap-2 bg-red-700 px-2 py-1 text-white rounded-md shadow-xl cursor-pointer btn"
+                        className="flex items-center gap-2 bg-red-500 hover:bg-red-600 px-2 py-1 text-white rounded-md shadow-xl cursor-pointer btn"
                       >
                         <FaRegTrashAlt />
                         Cancel

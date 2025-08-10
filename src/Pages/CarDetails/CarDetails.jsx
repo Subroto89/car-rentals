@@ -27,7 +27,7 @@ const CarDetails = () => {
 
   return (
     <div>
-      <div className="w-11/12 lg:w-9/12 mx-auto bg-blue-50 text-gray-800 rounded-md shadow-md overflow-hidden h-auto pb-20 mt-6">
+      <div className="w-11/12 lg:w-9/12 mx-auto bg-blue-50 text-gray-800 rounded-md shadow-md overflow-hidden h-auto pb-8 mt-6">
         <h2 className="w-11/12 mx-auto text-xl font-bold mt-6">Car Info</h2>
         <div className="flex items-center justify-start gap-6 p-6">
           <figure className="overflow-hidden rounded-md shadow-md">
@@ -82,7 +82,7 @@ const CarDetails = () => {
             <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-md mr-2">Daily Rent:</span>{dailyRent}</p>
             <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-md mr-2">Car Status:</span>{availability}</p>
             <p className="text-md font-semibold"><span className="font-bold text-sm lg:text-md mr-2">Booking Status:</span>{bookingStatus>0?'Booked' : 'Not Booked'}</p>
-              <button onClick={handleShowModal} className="bg-green-400 text-md font-semibold hover:bg-green-600 text-white hover:text-amber-600 px-3 py-1 rounded-md">Book Now</button>
+              <button onClick={handleShowModal} className="bg-blue-300 text-md font-semibold hover:bg-blue-400 text-white hover:text-white px-3 py-1 rounded-md">Book Now</button>
         </div>
 
         <div className="w-11/12 mx-auto block lg:hidden">
@@ -103,7 +103,7 @@ const CarDetails = () => {
                 <td className="font-bold text-sm lg:text-md mr-2">Booking Status:</td>
                 <td className="text-md font-semibold">{bookingStatus ?'Booked' : 'Not Booked'}</td>
                 <td colspan="2" className="pr-4">
-                  <button onClick={handleShowModal} className="w-full bg-green-400 text-md font-semibold hover:bg-green-600 text-white hover:text-amber-600 py-1 rounded-md">Book Now</button>
+                  <button onClick={handleShowModal} className="w-full bg-blue-300 text-md font-semibold hover:bg-blue-400 text-white hover:text-white py-1 rounded-md">Book Now</button>
                 </td>
                 
               </tr>
