@@ -27,12 +27,12 @@ const SideNav = ({ setOpen }) => {
 
   return (
     <div>
-      <div className="h-screen w-1/2 bg-white pl-4 pr-4 pt-6 mt-6 ">
-        <div className="mb-4">
+      <div className="h-screen w-1/2 bg-gray-50 pl-4 pr-4 pt-6 ">
+        <div className="mb-4 flex items-center justify-center">
           {user && (
             <img
               src={user?.photoURL}
-              className="w-16 h-16 rounded-full ring-2 ring-blue-600 p-2"
+              className="w-16 h-16 rounded-full ring-2 ring-blue-600 p-1"
             />
           )}
         </div>
@@ -42,7 +42,7 @@ const SideNav = ({ setOpen }) => {
             key={index}
             to={link.linkPath}
             onClick={() => setOpen()}
-            className="flex flex-col text-xl text-gray-600 font-semibold border border-gray-600 mb-2 hover:bg-blue-100 rounded-md px-4 py-1"
+            className="flex flex-col text-md text-gray-600 font-semibold border border-gray-600 mb-2 hover:bg-blue-100 rounded-md px-4 py-1"
           >
             {link.linkName}
           </NavLink>
@@ -56,7 +56,7 @@ const SideNav = ({ setOpen }) => {
                 key={index}
                 to={link.linkPath}
                 onClick={() => setOpen()}
-                className="flex flex-col text-xl text-gray-600 font-semibold border border-gray-600 mb-2 hover:bg-blue-100 rounded-md px-4 py-1"
+                className="flex flex-col text-md text-gray-600 font-semibold border border-gray-600 mb-2 hover:bg-blue-100 rounded-md px-4 py-1"
               >
                 {link.linkName}
               </NavLink>
@@ -70,19 +70,19 @@ const SideNav = ({ setOpen }) => {
               onClick={() => {
                 handleSignOut(), setOpen();
               }}
-              className="btn btn-outline text-xl hover:bg-blue-100 hover:text-gray-700"
+              className="btn btn-outline text-md font-bold hover:bg-blue-100 hover:text-gray-700"
             >
               <MdLogout /> Sign Out
             </button>
           ) : (
             <>
-              <Link to="/register" className="btn btn-outline text-xl">
+              <Link to="/register" className="btn btn-outline text-md">
                 <MdAccountCircle /> Register
               </Link>
               <Link
                 to="/signIn"
                 onClick={() => setOpen(false)}
-                className="btn btn-outline text-xl"
+                className="btn btn-outline text-md"
               >
                 <MdLogin /> Sign In
               </Link>

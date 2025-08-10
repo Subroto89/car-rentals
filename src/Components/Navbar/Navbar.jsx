@@ -123,7 +123,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* Menu For Hamburger Icon */}
-      <div className="mt-12 absolute top-20 z-50 w-full lg:hidden h-full">
+      <div className=" absolute top-15 z-50 w-full lg:hidden h-full transition  duration-1000 ease-in-out">
         {open && <SideNav setOpen={setOpen}></SideNav>}
       </div>
     </div>
