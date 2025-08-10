@@ -5,6 +5,7 @@ import CarUpdate from "./CarUpdate";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loader from "../../Components/Loader"
+import noDataImage from "../../../src/assets/no Data.png";
 
 // Receive userEmail as a prop
 const CarsList = ({ userEmail }) => {
@@ -151,14 +152,18 @@ const CarsList = ({ userEmail }) => {
 
   if (!carsData || carsData.length === 0) {
     return (
-      <div className="text-center text-gray-400 text-xl py-8">
-        No cars found for this user.
+      <div className="text-center text-gray-400 text-xl py-8 h-screen flex flex-col items-center justify-center bg-blue-100">
+        <div>
+          <img src={noDataImage} alt="No Data" className="w-40 mb-4" />
+        </div>
+        
+        <p className="font-bold text-amber-600">No cars found for this user.</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-screen bg-blue-100 pt-1 pb-4">
+    <div className="w-full bg-blue-100 pt-1">
     <div className="w-11/12 mx-auto sticky top-[64px] z-50 bg-blue-50 border-b border-white py-2">
         <div className="w-11/12 mx-auto flex flex-col lg:flex-row items-center justify-between px-4">
         <h2 className="text-xl text-gray-700 text-center mb-4 font-semibold">
@@ -183,7 +188,7 @@ const CarsList = ({ userEmail }) => {
         </div>
       </div>
     </div>
-      <div className="w-11/12 mx-auto overflow-x-auto bg-white rounded-md shadow-md border border-gray-200 my-8">
+      <div className="w-11/12 mx-auto overflow-auto bg-white rounded-md shadow-md border border-gray-200 my-8">
         <table className="min-w-full divide-y divide-gray-200">
           {/* Table Head */}
           <thead className="sticky top-0 z-40 bg-gray-100">
